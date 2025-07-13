@@ -723,36 +723,35 @@
         }
 
         // Load actual Tabiya taxonomy data
+    
+        // Load actual Tabiya taxonomy data (Generated from CSV files)
         function loadTaxonomyData() {
             console.log("Loading Tabiya Inclusive Livelihoods Taxonomy...");
             
-            // Real taxonomy data from processed CSV files
             const realOccupations = [
-                // Sample of Seen Economy occupations
-                { code: "0110", label: "Commissioned armed forces officers", description: "Armed forces occupations", type: "seen", groupCode: "01" },
+                // Seen Economy - Real ESCO occupations
+                { code: "0110", label: "Commissioned armed forces officers", description: "Armed forces occupations include all jobs held by members of the armed forces.", type: "seen", groupCode: "01" },
                 { code: "1111.1", label: "Legislators", description: "Determine, formulate and direct the implementation of government and organizational policy.", type: "seen", groupCode: "1111" },
-                { code: "1112.1", label: "Senior government officials", description: "Plan, direct, coordinate and evaluate the overall activities of enterprises, governments and other organizations.", type: "seen", groupCode: "1112" },
-                { code: "1120.1", label: "Managing directors and chief executives", description: "Plan, direct, coordinate and evaluate the overall activities of enterprises, governments and other organizations.", type: "seen", groupCode: "1120" },
+                { code: "1112.1", label: "Senior government officials", description: "Senior officials who formulate policy, exercise executive and administrative authority.", type: "seen", groupCode: "1112" },
+                { code: "1120.1", label: "Managing directors and chief executives", description: "Plan, direct, coordinate and evaluate the overall activities of enterprises.", type: "seen", groupCode: "1120" },
                 { code: "2111.1", label: "Physicists and astronomers", description: "Conduct research into physical phenomena, make observations and develop theories.", type: "seen", groupCode: "2111" },
                 { code: "2112.1", label: "Meteorologists", description: "Study atmospheric conditions and make weather forecasts.", type: "seen", groupCode: "2112" },
+                { code: "2113.1", label: "Chemists", description: "Conduct research and analysis to improve understanding of chemical phenomena.", type: "seen", groupCode: "2113" },
                 
-                // Unseen Economy occupations (I-codes)
-                { code: "I31_0_1", label: "meal planning", description: "Planning meals and coordinating food preparation activities for household members.", type: "unseen", groupCode: "I31", altLabels: "meal coordination, food planning, menu planning" },
-                { code: "I31_0_2", label: "food preparation", description: "Preparing ingredients and cooking meals for household members.", type: "unseen", groupCode: "I31", altLabels: "cooking, meal preparation, food preparation" },
-                { code: "I31_0_3", label: "baking", description: "Baking bread, cakes, pastries and other baked goods for household consumption.", type: "unseen", groupCode: "I31", altLabels: "home baking, bread making" },
-                { code: "I31_0_4", label: "preserving food", description: "Preserving, canning, and storing food for household use.", type: "unseen", groupCode: "I31", altLabels: "food preservation, canning, food storage" },
-                
-                { code: "I32_0_1", label: "cleaning dwelling interior", description: "Cleaning and maintaining the interior of household dwellings.", type: "unseen", groupCode: "I32", altLabels: "housekeeping, interior cleaning, home cleaning" },
-                { code: "I32_0_2", label: "cleaning dwelling exterior", description: "Cleaning and maintaining the exterior of household dwellings and surroundings.", type: "unseen", groupCode: "I32", altLabels: "exterior cleaning, yard maintenance" },
-                
-                { code: "I41_0_1", label: "caring for children including feeding, cleaning, physical care", description: "Providing physical care for children including feeding, bathing, dressing, and attending to health needs.", type: "unseen", groupCode: "I41", altLabels: "childcare, child nurturing, physical care of children" },
-                { code: "I41_0_2", label: "supervising children", description: "Supervising and monitoring children's activities and ensuring their safety.", type: "unseen", groupCode: "I41", altLabels: "child supervision, child monitoring" },
-                { code: "I41_0_3", label: "instructing, teaching, training, helping children", description: "Teaching, instructing and helping children with learning and development.", type: "unseen", groupCode: "I41", altLabels: "child education, home schooling, child development" },
-                
-                { code: "I42_0_1", label: "assisting dependent adults with tasks of daily living", description: "Helping dependent adults with daily activities and personal care.", type: "unseen", groupCode: "I42", altLabels: "adult care, elderly care, dependent care" },
-                { code: "I42_0_2", label: "assisting dependent adults with medical care", description: "Providing medical assistance and health support to dependent adults.", type: "unseen", groupCode: "I42", altLabels: "medical assistance, health care support" },
-                { code: "I42_0_3", label: "assisting dependent adults with forms, administration, accounts", description: "Helping dependent adults with paperwork, financial matters and administrative tasks.", type: "unseen", groupCode: "I42", altLabels: "administrative assistance, financial help" },
-                { code: "I42_0_4", label: "affective/emotional support for dependent adults", description: "Providing emotional support and companionship to dependent adults.", type: "unseen", groupCode: "I42", altLabels: "emotional support, companionship, emotional care" }
+                // Unseen Economy - Real ICATUS-based occupations
+                { code: "I31_0_1", label: "meal planning", description: "Planning meals and coordinating food preparation activities for household members.", type: "unseen", groupCode: "I31", altLabels: "meal coordination\nfood planning\nmenu planning" },
+                { code: "I31_0_2", label: "food preparation", description: "Preparing ingredients and cooking meals for household members.", type: "unseen", groupCode: "I31", altLabels: "cooking\nmeal preparation\nfood preparation" },
+                { code: "I31_0_3", label: "baking", description: "Baking bread, cakes, pastries and other baked goods for household consumption.", type: "unseen", groupCode: "I31", altLabels: "home baking\nbread making" },
+                { code: "I31_0_4", label: "preserving food", description: "Preserving, canning, and storing food for household use.", type: "unseen", groupCode: "I31", altLabels: "food preservation\ncanning\nfood storage" },
+                { code: "I32_0_1", label: "cleaning dwelling interior", description: "Cleaning and maintaining the interior of household dwellings.", type: "unseen", groupCode: "I32", altLabels: "housekeeping\ninterior cleaning\nhome cleaning" },
+                { code: "I32_0_2", label: "cleaning dwelling exterior", description: "Cleaning and maintaining the exterior of household dwellings and surroundings.", type: "unseen", groupCode: "I32", altLabels: "exterior cleaning\nyard maintenance" },
+                { code: "I41_0_1", label: "caring for children including feeding, cleaning, physical care", description: "Providing physical care for children including feeding, bathing, dressing, and attending to health needs.", type: "unseen", groupCode: "I41", altLabels: "childcare\nchild nurturing\nphysical care of children" },
+                { code: "I41_0_2", label: "supervising children", description: "Supervising and monitoring children's activities and ensuring their safety.", type: "unseen", groupCode: "I41", altLabels: "child supervision\nchild monitoring" },
+                { code: "I41_0_3", label: "instructing, teaching, training, helping children", description: "Teaching, instructing and helping children with learning and development.", type: "unseen", groupCode: "I41", altLabels: "child education\nhome schooling\nchild development" },
+                { code: "I42_0_1", label: "assisting dependent adults with tasks of daily living", description: "Helping dependent adults with daily activities and personal care.", type: "unseen", groupCode: "I42", altLabels: "adult care\nelderly care\ndependent care" },
+                { code: "I42_0_2", label: "assisting dependent adults with medical care", description: "Providing medical assistance and health support to dependent adults.", type: "unseen", groupCode: "I42", altLabels: "medical assistance\nhealth care support" },
+                { code: "I42_0_3", label: "assisting dependent adults with forms, administration, accounts", description: "Helping dependent adults with paperwork, financial matters and administrative tasks.", type: "unseen", groupCode: "I42", altLabels: "administrative assistance\nfinancial help" },
+                { code: "I42_0_4", label: "affective/emotional support for dependent adults", description: "Providing emotional support and companionship to dependent adults.", type: "unseen", groupCode: "I42", altLabels: "emotional support\ncompanionship\nemotional care" }
             ];
 
             const realGroups = [
@@ -761,6 +760,8 @@
                 { code: "1", label: "Managers", description: "Plan, direct and coordinate the overall activities of enterprises, governments and other organizations.", type: "seen", level: 1, children: ["11", "12", "13", "14"] },
                 { code: "2", label: "Professionals", description: "Increase the existing stock of knowledge, apply scientific concepts and theories.", type: "seen", level: 1, children: ["21", "22", "23", "24", "25", "26"] },
                 { code: "3", label: "Technicians and associate professionals", description: "Perform mostly technical and related tasks connected with research and application of scientific concepts.", type: "seen", level: 1, children: ["31", "32", "33", "34", "35"] },
+                { code: "4", label: "Clerical support workers", description: "Record, organize, store, compute and retrieve information, and perform clerical duties.", type: "seen", level: 1, children: ["41", "42", "43", "44"] },
+                { code: "5", label: "Service and sales workers", description: "Provide personal and protective services related to travel, housekeeping, catering, personal care.", type: "seen", level: 1, children: ["51", "52", "53", "54"] },
                 
                 // Sub-major groups (Level 2) - Seen Economy
                 { code: "11", label: "Chief executives, senior officials and legislators", description: "Plan, direct, coordinate and evaluate the overall activities of enterprises, governments and other organizations.", type: "seen", level: 2, parent: "1", children: ["111", "112"] },
@@ -803,7 +804,7 @@
             renderTaxonomyTree();
             updateSearchStats();
         }
-
+        
         // Tab switching
         function switchTab(tab) {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
