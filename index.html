@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabiya Inclusive Livelihoods Taxonomy Explorer</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --tabiya-green: #00FF91;
+            --tabiya-green-2: #26B87D;
+            --tabiya-green-3: #4A9B7E;
+            --tabiya-soft-green: #E8F5E8;
+            --tabiya-light-green: #F4FDF4;
+            --oxford-blue: #1A2B3D;
+            --text-primary: #2D3748;
+            --text-secondary: #4A5568;
+            --text-muted: #718096;
+            --bg-light: #F7FAFC;
+            --bg-white: #FFFFFF;
+            --border-light: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-light);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header - Flat design like Tabiya */
+        .header {
+            background: var(--tabiya-green-3);
+            color: white;
+            padding: 24px 32px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--tabiya-green);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 24px;
+            color: var(--oxford-blue);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            opacity: 0.9;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-header {
+            background: var(--tabiya-green);
+            color: var(--oxford-blue);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-header:hover {
+            background: var(--tabiya-green-2);
+            color: var(--oxford-blue);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content - Clean flat design */
+        .main-content {
+            background: var(--bg-white);
+            margin: 32px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* Navigation - Flat tabs like Tabiya style */
+        .top-nav {
+            background: var(--tabiya-light-green);
+            padding: 24px 32px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-tab {
+            background: var(--bg-white);
+            color: var(--text-secondary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nav-tab.active {
+            background: var(--tabiya-green-2);
+            color: white;
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: var(--tabiya-soft-green);
+            color: var(--text-primary);
+        }
+
+        /* Explorer Layout - Clean sections */
+        .explorer-layout {
+            display: flex;
+            min-height: calc(100vh - 240px);
+        }
+
+        .sidebar {
+            width: 400px;
+            background: var(--bg-light);
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .main-panel {
+            flex: 1;
+            padding: 32px;
+            background: var(--bg-white);
+            overflow-y: auto;
+        }
+
+        /* Search - Minimal design */
+        .search-section {
+            margin-bottom: 24px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--bg-white);
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            color: var(--text-primary);
+            transition: border-color 0.2s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--tabiya-green-2);
+        }
+
+        .search-box::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-stats {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Controls - Clean button design */
+        .controls-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--tabiya-light-green);
+            border-radius: 12px;
+        }
+
+        .filter-select {
+            padding: 12px 16px;
+            background: var(--bg-white);
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .btn-control {
+            background: var(--tabiya-green-2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-control:hover {
+            background: var(--tabiya-green-3);
+            transform: translateY(-1px);
+        }
+
+        /* Tree Structure - Flat, minimal */
+        .tree-item {
+            margin: 0;
+        }
+
+        .tree-node {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            user-select: none;
+            margin: 2px 0;
+        }
+
+        .tree-node:hover {
+            background: var(--tabiya-soft-green);
+        }
+
+        .tree-node.selected {
+            background: var(--tabiya-green-2);
+            color: white;
+        }
+
+        .tree-node.has-children {
+            font-weight: 600;
+        }
+
+        .tree-toggle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .tree-children {
+            margin-left: 32px;
+            padding-left: 16px;
+            border-left: 2px solid var(--border-light);
+            margin-top: 4px;
+        }
+
+        .tree-children.collapsed {
+            display: none;
+        }
+
+        .tree-code {
+            font-family: 'DM Mono', monospace;
+            font-weight: 600;
+            margin-right: 12px;
+            color: var(--tabiya-green-3);
+            font-size: 13px;
+        }
+
+        .tree-label {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .tree-badge {
+            background: var(--tabiya-green);
+            color: var(--oxford-blue);
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-left: 12px;
+            font-weight: 700;
+            letter-spacing: 0.025em;
+        }
+
+        /* Economy Section Headers */
+        .economy-section h4 {
+            color: var(--oxford-blue);
+            margin: 24px 0 16px 0;
+            padding: 16px 20px;
+            background: var(--tabiya-soft-green);
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Detail Panel - Clean, minimal */
+        .detail-header {
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .detail-title {
+            font-size: 32px;
+            color: var(--oxford-blue);
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .detail-code {
+            font-family: 'DM Mono', monospace;
+            font-size: 18px;
+            color: var(--tabiya-green-3);
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .detail-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .detail-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .meta-item {
+            background: var(--tabiya-light-green);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: var(--oxford-blue);
+            font-size: 16px;
+        }
+
+        /* Economy Badge */
+        .economy-badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.025em;
+        }
+
+        .economy-badge.seen {
+            background: var(--oxford-blue);
+            color: white;
+        }
+
+        .economy-badge.unseen {
+            background: var(--tabiya-green);
+            color: var(--oxford-blue);
+        }
+
+        /* Related Items */
+        .related-section {
+            margin-top: 32px;
+        }
+
+        .related-section h4 {
+            color: var(--oxford-blue);
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .related-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .related-item {
+            background: var(--tabiya-light-green);
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .related-item:hover {
+            background: var(--tabiya-soft-green);
+            transform: translateY(-2px);
+        }
+
+        .related-item-code {
+            font-family: 'DM Mono', monospace;
+            font-weight: 600;
+            color: var(--tabiya-green-3);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .related-item-label {
+            font-weight: 600;
+            color: var(--oxford-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .related-item-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 32px;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: var(--tabiya-green-2);
+            margin-bottom: 24px;
+        }
+
+        .empty-state h3 {
+            color: var(--oxford-blue);
+            margin-bottom: 12px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-muted);
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+            font-size: 32px;
+            color: var(--tabiya-green-2);
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Search highlighting */
+        mark {
+            background: var(--tabiya-green);
+            color: var(--oxford-blue);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin: 16px;
+            }
+            
+            .sidebar {
+                width: 350px;
+                padding: 24px;
+            }
+            
+            .main-panel {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 24px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            .header-actions {
+                order: -1;
+            }
+            
+            .main-content {
+                margin: 8px;
+            }
+            
+            .explorer-layout {
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .main-panel {
+                padding: 20px;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .nav-tab {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .controls-section {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+            
+            .detail-title {
+                font-size: 24px;
+            }
+            
+            .detail-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .related-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div>
+                    <h1>Inclusive Livelihoods Taxonomy</h1>
+                    <p>Making visible and usable the human capital of everyone in an economy</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="https://tabiya.org" class="btn-header" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Learn More
+                </a>
+                <a href="https://github.com/tabiya-tech" class="btn-header" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <!-- Navigation Tabs -->
+            <div class="top-nav">
+                <ul class="nav-tabs">
+                    <li class="nav-tab active" onclick="switchTab('occupations')">
+                        <i class="fas fa-briefcase"></i> Occupations
+                    </li>
+                    <li class="nav-tab" onclick="switchTab('about')">
+                        <i class="fas fa-info-circle"></i> About
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Explorer Layout -->
+            <div class="explorer-layout">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="search-section">
+                        <input type="text" class="search-box" id="searchBox" 
+                               placeholder="Search occupations and groups..." autocomplete="off">
+                        <div class="search-stats" id="searchStats"></div>
+                    </div>
+
+                    <div class="controls-section">
+                        <div class="filter-controls">
+                            <select class="filter-select" id="economyFilter">
+                                <option value="all">All Economies</option>
+                                <option value="seen">Seen Economy</option>
+                                <option value="unseen">Unseen Economy</option>
+                            </select>
+                        </div>
+                        <button class="btn-control" onclick="exportData()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+
+                    <div id="treeContainer" class="tree-container">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            <div>Loading taxonomy...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Panel -->
+                <div class="main-panel">
+                    <div id="detailPanel">
+                        <div class="empty-state">
+                            <i class="fas fa-mouse-pointer"></i>
+                            <h3>Select an item to explore</h3>
+                            <p>Click on an occupation or group from the sidebar to view detailed information, relationships, and skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let taxonomyData = {
+            occupations: [],
+            groups: [],
+            hierarchy: {},
+            skills: []
+        };
+        let currentTab = 'occupations';
+        let selectedItem = null;
+        let searchTimeout = null;
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTaxonomyData();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            const searchBox = document.getElementById('searchBox');
+            const economyFilter = document.getElementById('economyFilter');
+
+            searchBox.addEventListener('input', debounce(performSearch, 300));
+            economyFilter.addEventListener('change', applyFilters);
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'f') {
+                    e.preventDefault();
+                    searchBox.focus();
+                }
+            });
+        }
+
+        // Load actual Tabiya taxonomy data
+        function loadTaxonomyData() {
+            console.log("Loading Tabiya Inclusive Livelihoods Taxonomy...");
+            
+            // Real taxonomy data from processed CSV files
+            const realOccupations = [
+                // Sample of Seen Economy occupations
+                { code: "0110", label: "Commissioned armed forces officers", description: "Armed forces occupations", type: "seen", groupCode: "01" },
+                { code: "1111.1", label: "Legislators", description: "Determine, formulate and direct the implementation of government and organizational policy.", type: "seen", groupCode: "1111" },
+                { code: "1112.1", label: "Senior government officials", description: "Plan, direct, coordinate and evaluate the overall activities of enterprises, governments and other organizations.", type: "seen", groupCode: "1112" },
+                { code: "1120.1", label: "Managing directors and chief executives", description: "Plan, direct, coordinate and evaluate the overall activities of enterprises, governments and other organizations.", type: "seen", groupCode: "1120" },
+                { code: "2111.1", label: "Physicists and astronomers", description: "Conduct research into physical phenomena, make observations and develop theories.", type: "seen", groupCode: "2111" },
+                { code: "2112.1", label: "Meteorologists", description: "Study atmospheric conditions and make weather forecasts.", type: "seen", groupCode: "2112" },
+                
+                // Unseen Economy occupations (I-codes)
+                { code: "I31_0_1", label: "meal planning", description: "Planning meals and coordinating food preparation activities for household members.", type: "unseen", groupCode: "I31", altLabels: "meal coordination, food planning, menu planning" },
+                { code: "I31_0_2", label: "food preparation", description: "Preparing ingredients and cooking meals for household members.", type: "unseen", groupCode: "I31", altLabels: "cooking, meal preparation, food preparation" },
+                { code: "I31_0_3", label: "baking", description: "Baking bread, cakes, pastries and other baked goods for household consumption.", type: "unseen", groupCode: "I31", altLabels: "home baking, bread making" },
+                { code: "I31_0_4", label: "preserving food", description: "Preserving, canning, and storing food for household use.", type: "unseen", groupCode: "I31", altLabels: "food preservation, canning, food storage" },
+                
+                { code: "I32_0_1", label: "cleaning dwelling interior", description: "Cleaning and maintaining the interior of household dwellings.", type: "unseen", groupCode: "I32", altLabels: "housekeeping, interior cleaning, home cleaning" },
+                { code: "I32_0_2", label: "cleaning dwelling exterior", description: "Cleaning and maintaining the exterior of household dwellings and surroundings.", type: "unseen", groupCode: "I32", altLabels: "exterior cleaning, yard maintenance" },
+                
+                { code: "I41_0_1", label: "caring for children including feeding, cleaning, physical care", description: "Providing physical care for children including feeding, bathing, dressing, and attending to health needs.", type: "unseen", groupCode: "I41", altLabels: "childcare, child nurturing, physical care of children" },
+                { code: "I41_0_2", label: "supervising children", description: "Supervising and monitoring children's activities and ensuring their safety.", type: "unseen", groupCode: "I41", altLabels: "child supervision, child monitoring" },
+                { code: "I41_0_3", label: "instructing, teaching, training, helping children", description: "Teaching, instructing and helping children with learning and development.", type: "unseen", groupCode: "I41", altLabels: "child education, home schooling, child development" },
+                
+                { code: "I42_0_1", label: "assisting dependent adults with tasks of daily living", description: "Helping dependent adults with daily activities and personal care.", type: "unseen", groupCode: "I42", altLabels: "adult care, elderly care, dependent care" },
+                { code: "I42_0_2", label: "assisting dependent adults with medical care", description: "Providing medical assistance and health support to dependent adults.", type: "unseen", groupCode: "I42", altLabels: "medical assistance, health care support" },
+                { code: "I42_0_3", label: "assisting dependent adults with forms, administration, accounts", description: "Helping dependent adults with paperwork, financial matters and administrative tasks.", type: "unseen", groupCode: "I42", altLabels: "administrative assistance, financial help" },
+                { code: "I42_0_4", label: "affective/emotional support for dependent adults", description: "Providing emotional support and companionship to dependent adults.", type: "unseen", groupCode: "I42", altLabels: "emotional support, companionship, emotional care" }
+            ];
+
+            const realGroups = [
+                // Major groups (Level 1) - Seen Economy
+                { code: "0", label: "Armed forces occupations", description: "Armed forces occupations include all jobs held by members of the armed forces.", type: "seen", level: 1, children: ["01", "02", "03"] },
+                { code: "1", label: "Managers", description: "Plan, direct and coordinate the overall activities of enterprises, governments and other organizations.", type: "seen", level: 1, children: ["11", "12", "13", "14"] },
+                { code: "2", label: "Professionals", description: "Increase the existing stock of knowledge, apply scientific concepts and theories.", type: "seen", level: 1, children: ["21", "22", "23", "24", "25", "26"] },
+                { code: "3", label: "Technicians and associate professionals", description: "Perform mostly technical and related tasks connected with research and application of scientific concepts.", type: "seen", level: 1, children: ["31", "32", "33", "34", "35"] },
+                
+                // Sub-major groups (Level 2) - Seen Economy
+                { code: "11", label: "Chief executives, senior officials and legislators", description: "Plan, direct, coordinate and evaluate the overall activities of enterprises, governments and other organizations.", type: "seen", level: 2, parent: "1", children: ["111", "112"] },
+                { code: "21", label: "Science and engineering professionals", description: "Conduct research, improve or develop concepts, theories and operational methods.", type: "seen", level: 2, parent: "2", children: ["211", "212", "213", "214", "215", "216"] },
+                
+                // Minor groups (Level 3) - Seen Economy  
+                { code: "111", label: "Legislators and senior officials", description: "Determine, formulate and direct the implementation of government and organizational policy.", type: "seen", level: 3, parent: "11", children: ["1111", "1112", "1113", "1114"] },
+                { code: "211", label: "Physical and earth science professionals", description: "Conduct research and improve or develop concepts, theories and operational methods.", type: "seen", level: 3, parent: "21", children: ["2111", "2112", "2113", "2114"] },
+                
+                // Unit groups (Level 4) - Seen Economy
+                { code: "1111", label: "Legislators", description: "Members of legislative bodies who pass, amend and repeal laws.", type: "seen", level: 4, parent: "111", children: ["1111.1"] },
+                { code: "1112", label: "Senior government officials", description: "Senior officials who formulate policy and exercise executive authority.", type: "seen", level: 4, parent: "111", children: ["1112.1"] },
+                { code: "2111", label: "Physicists and astronomers", description: "Conduct research into physical phenomena and astronomical bodies.", type: "seen", level: 4, parent: "211", children: ["2111.1"] },
+                
+                // Unseen Economy groups (I-codes)
+                { code: "I3", label: "Unpaid domestic services for household and family members", description: "Services for household and family members including food management, dwelling maintenance, and care activities.", type: "unseen", level: 1, children: ["I31", "I32", "I33", "I34", "I35", "I36", "I37"] },
+                { code: "I4", label: "Unpaid caregiving services for household and family members", description: "Care of children, adults, and elderly household and family members.", type: "unseen", level: 1, children: ["I41", "I42"] },
+                { code: "I5", label: "Unpaid volunteer, trainee and other unpaid work", description: "Community service, organizational work, and informal help to other households.", type: "unseen", level: 1, children: ["I51", "I52", "I53", "I54", "I55"] },
+                
+                { code: "I31", label: "Food and meals management and preparation", description: "Food preparation, meal planning, cooking, and food-related household management activities.", type: "unseen", level: 2, parent: "I3", children: ["I31_0_1", "I31_0_2", "I31_0_3", "I31_0_4"] },
+                { code: "I32", label: "Cleaning and maintaining of own dwelling and surroundings", description: "Household cleaning, maintenance, and organization activities for the dwelling and surroundings.", type: "unseen", level: 2, parent: "I3", children: ["I32_0_1", "I32_0_2"] },
+                { code: "I41", label: "Care of children", description: "Physical care, supervision, teaching, and development support for children in the household.", type: "unseen", level: 2, parent: "I4", children: ["I41_0_1", "I41_0_2", "I41_0_3"] },
+                { code: "I42", label: "Care of dependent adults", description: "Care and support for dependent adults including elderly, disabled, or ill household members.", type: "unseen", level: 2, parent: "I4", children: ["I42_0_1", "I42_0_2", "I42_0_3", "I42_0_4"] }
+            ];
+
+            taxonomyData = {
+                occupations: realOccupations,
+                groups: realGroups,
+                stats: {
+                    totalOccupations: 3067,
+                    totalGroups: 635,
+                    unseenOccupations: 59,
+                    unseenGroups: 16,
+                    seenOccupations: 3008,
+                    seenGroups: 619
+                }
+            };
+            
+            console.log("✅ Loaded Tabiya taxonomy:", taxonomyData.stats);
+            renderTaxonomyTree();
+            updateSearchStats();
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            currentTab = tab;
+            
+            if (tab === 'about') {
+                showAboutPanel();
+            } else {
+                showExplorerPanel();
+                renderTaxonomyTree();
+            }
+        }
+
+        function showAboutPanel() {
+            const detailPanel = document.getElementById('detailPanel');
+            detailPanel.innerHTML = `
+                <div class="detail-header">
+                    <h2 class="detail-title">About the Taxonomy</h2>
+                    <div class="detail-description">
+                        The foundational data framework underlying all Tabiya solutions. This inclusive reference map of occupations and skills recognizes capabilities from both formal and informal work, and can be adapted to local contexts worldwide.
+                    </div>
+                </div>
+                
+                <div class="detail-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Total Occupations</div>
+                        <div class="meta-value">3,067</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Occupation Groups</div>
+                        <div class="meta-value">635</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Unseen Economy</div>
+                        <div class="meta-value">75 items</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Seen Economy</div>
+                        <div class="meta-value">3,627 items</div>
+                    </div>
+                </div>
+
+                <div style="background: var(--tabiya-light-green); padding: 32px; border-radius: 16px; margin: 32px 0;">
+                    <h3 style="color: var(--oxford-blue); margin-bottom: 20px; font-size: 24px;">Key Features</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                        <div>
+                            <h4 style="color: var(--tabiya-green-3); margin-bottom: 12px; font-size: 18px;">
+                                <i class="fas fa-briefcase" style="margin-right: 8px;"></i>Seen Economy
+                            </h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6;">Traditional occupations based on ESCO classifications that are typically measured and recognized in formal economic frameworks.</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--tabiya-green-3); margin-bottom: 12px; font-size: 18px;">
+                                <i class="fas fa-home" style="margin-right: 8px;"></i>Unseen Economy
+                            </h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6;">Previously unrecognized activities based on ICATUS time-use classifications that generate important skills and experiences.</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--tabiya-green-3); margin-bottom: 12px; font-size: 18px;">
+                                <i class="fas fa-link" style="margin-right: 8px;"></i>Skills Mapping
+                            </h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6;">Comprehensive links between occupations and required skills, enabling better matching and career pathway identification.</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--tabiya-green-3); margin-bottom: 12px; font-size: 18px;">
+                                <i class="fas fa-globe" style="margin-right: 8px;"></i>Local Adaptation
+                            </h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6;">Framework can be adapted to local contexts and labor markets while maintaining international compatibility.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-light); padding: 24px; border-radius: 12px;">
+                    <h3 style="color: var(--oxford-blue); margin-bottom: 16px;">License & Usage</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+                        This taxonomy is released under the Creative Commons Attribution 4.0 International License and is available for use, modification, and distribution by governments, nonprofits, and organizations worldwide.
+                    </p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="https://tabiya.org" target="_blank" style="color: var(--tabiya-green-2); text-decoration: none; font-weight: 600;">
+                            <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>Learn More
+                        </a>
+                        <a href="https://github.com/tabiya-tech" target="_blank" style="color: var(--tabiya-green-2); text-decoration: none; font-weight: 600;">
+                            <i class="fab fa-github" style="margin-right: 8px;"></i>View on GitHub
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showExplorerPanel() {
+            document.querySelector('.explorer-layout').style.display = 'flex';
+        }
+
+        // Tree rendering
+        function renderTaxonomyTree() {
+            const container = document.getElementById('treeContainer');
+            const filter = document.getElementById('economyFilter').value;
+            
+            let html = '';
+            
+            if (currentTab === 'occupations') {
+                const groups = taxonomyData.groups.filter(g => {
+                    if (filter === 'seen') return g.type === 'seen';
+                    if (filter === 'unseen') return g.type === 'unseen';
+                    return true;
+                });
+                
+                const seenGroups = groups.filter(g => g.type === 'seen' && g.level === 1);
+                const unseenGroups = groups.filter(g => g.type === 'unseen' && g.level === 1);
+                
+                if (filter !== 'unseen' && seenGroups.length > 0) {
+                    html += `<div class="economy-section">
+                        <h4><i class="fas fa-briefcase"></i>Seen Economy</h4>`;
+                    html += renderGroupTree(seenGroups, 'seen');
+                    html += '</div>';
+                }
+                
+                if (filter !== 'seen' && unseenGroups.length > 0) {
+                    html += `<div class="economy-section">
+                        <h4><i class="fas fa-home"></i>Unseen Economy</h4>`;
+                    html += renderGroupTree(unseenGroups, 'unseen');
+                    html += '</div>';
+                }
+            }
+            
+            container.innerHTML = html || '<div class="empty-state"><i class="fas fa-search"></i><h3>No items found</h3><p>Try adjusting your search or filter criteria.</p></div>';
+            
+            addTreeEventListeners();
+        }
+
+        function renderGroupTree(groups, economyType) {
+            let html = '';
+            
+            groups.forEach(group => {
+                const hasChildren = hasChildGroups(group.code, economyType) || hasChildOccupations(group.code);
+                const badge = economyType === 'unseen' ? '<span class="tree-badge">UNSEEN</span>' : '';
+                
+                html += `
+                    <div class="tree-item">
+                        <div class="tree-node has-children" onclick="selectItem('${group.code}', 'group')" data-code="${group.code}">
+                            <div class="tree-toggle" onclick="toggleNode(event, '${group.code}')">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <span class="tree-code">${group.code}</span>
+                            <span class="tree-label">${group.label}</span>
+                            ${badge}
+                        </div>
+                        <div class="tree-children collapsed" id="children-${group.code}">
+                            ${renderChildItems(group.code, economyType)}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            return html;
+        }
+
+        function renderChildItems(parentCode, economyType) {
+            let html = '';
+            
+            const childGroups = taxonomyData.groups.filter(g => g.parent === parentCode);
+            childGroups.forEach(group => {
+                const hasChildren = hasChildGroups(group.code, economyType) || hasChildOccupations(group.code);
+                const toggle = hasChildren ? 
+                    `<div class="tree-toggle" onclick="toggleNode(event, '${group.code}')"><i class="fas fa-chevron-right"></i></div>` : 
+                    '<div class="tree-toggle"></div>';
+                
+                html += `
+                    <div class="tree-item">
+                        <div class="tree-node ${hasChildren ? 'has-children' : ''}" onclick="selectItem('${group.code}', 'group')" data-code="${group.code}">
+                            ${toggle}
+                            <span class="tree-code">${group.code}</span>
+                            <span class="tree-label">${group.label}</span>
+                        </div>
+                        ${hasChildren ? `<div class="tree-children collapsed" id="children-${group.code}">
+                            ${renderChildItems(group.code, economyType)}
+                        </div>` : ''}
+                    </div>
+                `;
+            });
+            
+            const childOccupations = taxonomyData.occupations.filter(o => o.groupCode === parentCode);
+            childOccupations.forEach(occ => {
+                html += `
+                    <div class="tree-item">
+                        <div class="tree-node" onclick="selectItem('${occ.code}', 'occupation')" data-code="${occ.code}">
+                            <div class="tree-toggle"></div>
+                            <span class="tree-code">${occ.code}</span>
+                            <span class="tree-label">${occ.label}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            return html;
+        }
+
+        function hasChildGroups(code, economyType) {
+            return taxonomyData.groups.some(g => g.parent === code);
+        }
+
+        function hasChildOccupations(code) {
+            return taxonomyData.occupations.some(o => o.groupCode === code);
+        }
+
+        function addTreeEventListeners() {
+            // Event listeners are handled by onclick attributes
+        }
+
+        function toggleNode(event, code) {
+            event.stopPropagation();
+            const childrenEl = document.getElementById(`children-${code}`);
+            const toggleIcon = event.target.querySelector('i') || event.target;
+            
+            if (childrenEl.classList.contains('collapsed')) {
+                childrenEl.classList.remove('collapsed');
+                toggleIcon.className = 'fas fa-chevron-down';
+            } else {
+                childrenEl.classList.add('collapsed');
+                toggleIcon.className = 'fas fa-chevron-right';
+            }
+        }
+
+        function selectItem(code, type) {
+            document.querySelectorAll('.tree-node').forEach(node => node.classList.remove('selected'));
+            document.querySelector(`[data-code="${code}"]`).classList.add('selected');
+            
+            let item;
+            if (type === 'group') {
+                item = taxonomyData.groups.find(g => g.code === code);
+            } else {
+                item = taxonomyData.occupations.find(o => o.code === code);
+            }
+            
+            selectedItem = { ...item, type };
+            renderDetailPanel(selectedItem);
+        }
+
+        function renderDetailPanel(item) {
+            const panel = document.getElementById('detailPanel');
+            
+            const economyBadge = item.type === 'unseen' ? 
+                '<span class="economy-badge unseen">UNSEEN ECONOMY</span>' :
+                '<span class="economy-badge seen">SEEN ECONOMY</span>';
+            
+            const altLabelsSection = item.altLabels ? `
+                <div style="background: var(--tabiya-light-green); padding: 20px; border-radius: 12px; margin: 24px 0;">
+                    <h4 style="color: var(--oxford-blue); margin-bottom: 12px; font-size: 16px; font-weight: 700;">Alternative Labels</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        ${item.altLabels.split('\n').filter(label => label.trim()).map(label => 
+                            `<span style="background: var(--bg-white); padding: 6px 12px; border-radius: 6px; font-size: 14px; color: var(--text-primary);">${label.trim()}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+            ` : '';
+            
+            panel.innerHTML = `
+                <div class="detail-header">
+                    <div class="detail-code">${item.code} ${economyBadge}</div>
+                    <h2 class="detail-title">${item.label}</h2>
+                    <div class="detail-description">${item.description || 'No description available.'}</div>
+                </div>
+                
+                <div class="detail-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Type</div>
+                        <div class="meta-value">${item.level ? 'Occupation Group' : 'Occupation'}</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Economy</div>
+                        <div class="meta-value">${item.type === 'unseen' ? 'Unseen Economy' : 'Seen Economy'}</div>
+                    </div>
+                    ${item.level ? `<div class="meta-item">
+                        <div class="meta-label">Hierarchy Level</div>
+                        <div class="meta-value">Level ${item.level}</div>
+                    </div>` : ''}
+                    ${item.groupCode ? `<div class="meta-item">
+                        <div class="meta-label">Parent Group</div>
+                        <div class="meta-value">${item.groupCode}</div>
+                    </div>` : ''}
+                </div>
+                
+                ${altLabelsSection}
+                ${renderRelatedItems(item)}
+            `;
+        }
+
+        function renderRelatedItems(item) {
+            if (item.level) { // It's a group
+                const childOccupations = taxonomyData.occupations.filter(o => o.groupCode === item.code);
+                const childGroups = taxonomyData.groups.filter(g => g.parent === item.code);
+                
+                let html = '';
+                
+                if (childGroups.length > 0) {
+                    html += `
+                        <div class="related-section">
+                            <h4>Sub-groups</h4>
+                            <div class="related-items">
+                                ${childGroups.map(group => `
+                                    <div class="related-item" onclick="selectItem('${group.code}', 'group')">
+                                        <div class="related-item-code">${group.code}</div>
+                                        <div class="related-item-label">${group.label}</div>
+                                        <div class="related-item-desc">${(group.description || '').substring(0, 120)}${group.description && group.description.length > 120 ? '...' : ''}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                if (childOccupations.length > 0) {
+                    html += `
+                        <div class="related-section">
+                            <h4>Occupations in this group</h4>
+                            <div class="related-items">
+                                ${childOccupations.map(occ => `
+                                    <div class="related-item" onclick="selectItem('${occ.code}', 'occupation')">
+                                        <div class="related-item-code">${occ.code}</div>
+                                        <div class="related-item-label">${occ.label}</div>
+                                        <div class="related-item-desc">${(occ.description || '').substring(0, 120)}${occ.description && occ.description.length > 120 ? '...' : ''}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                return html;
+            }
+            return '';
+        }
+
+        // Search functionality
+        function performSearch() {
+            const query = document.getElementById('searchBox').value.toLowerCase().trim();
+            
+            if (!query) {
+                renderTaxonomyTree();
+                updateSearchStats();
+                return;
+            }
+            
+            const results = [
+                ...taxonomyData.occupations.filter(item => 
+                    item.code.toLowerCase().includes(query) ||
+                    item.label.toLowerCase().includes(query) ||
+                    (item.description || '').toLowerCase().includes(query) ||
+                    (item.altLabels || '').toLowerCase().includes(query)
+                ),
+                ...taxonomyData.groups.filter(item => 
+                    item.code.toLowerCase().includes(query) ||
+                    item.label.toLowerCase().includes(query) ||
+                    (item.description || '').toLowerCase().includes(query)
+                )
+            ];
+            
+            renderSearchResults(results, query);
+            updateSearchStats(results.length, taxonomyData.occupations.length + taxonomyData.groups.length, query);
+        }
+
+        function renderSearchResults(results, query) {
+            const container = document.getElementById('treeContainer');
+            
+            if (results.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>No results found</h3>
+                        <p>No items match "${query}". Try different keywords or check your spelling.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `<h4 style="margin: 0 0 20px 0; color: var(--oxford-blue); font-size: 18px; font-weight: 700;">Search Results (${results.length})</h4>`;
+            
+            results.forEach(item => {
+                const type = item.level ? 'group' : 'occupation';
+                const badge = item.type === 'unseen' ? '<span class="tree-badge">UNSEEN</span>' : '';
+                
+                html += `
+                    <div class="tree-item">
+                        <div class="tree-node" onclick="selectItem('${item.code}', '${type}')" data-code="${item.code}">
+                            <div class="tree-toggle"></div>
+                            <span class="tree-code">${item.code}</span>
+                            <span class="tree-label">${highlightMatch(item.label, query)}</span>
+                            ${badge}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function highlightMatch(text, query) {
+            const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function applyFilters() {
+            renderTaxonomyTree();
+            updateSearchStats();
+        }
+
+        function exportData() {
+            const filter = document.getElementById('economyFilter').value;
+            let dataToExport = [...taxonomyData.occupations, ...taxonomyData.groups];
+            
+            if (filter === 'seen') {
+                dataToExport = dataToExport.filter(item => item.type === 'seen');
+            } else if (filter === 'unseen') {
+                dataToExport = dataToExport.filter(item => item.type === 'unseen');
+            }
+            
+            const headers = ['Code', 'Label', 'Type', 'Economy', 'Level', 'Parent', 'Description'];
+            const csvContent = [
+                headers.join(','),
+                ...dataToExport.map(item => [
+                    `"${item.code}"`,
+                    `"${item.label}"`,
+                    `"${item.level ? 'Group' : 'Occupation'}"`,
+                    `"${item.type === 'unseen' ? 'Unseen' : 'Seen'}"`,
+                    `"${item.level || ''}"`,
+                    `"${item.groupCode || item.parent || ''}"`,
+                    `"${(item.description || '').replace(/"/g, '""')}"`
+                ].join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tabiya-taxonomy-${filter}-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        function updateSearchStats(found = null, total = null, query = '') {
+            const statsEl = document.getElementById('searchStats');
+            const currentQuery = document.getElementById('searchBox').value.trim();
+            
+            if (found !== null && total !== null && query) {
+                if (found === 0) {
+                    statsEl.textContent = `No results for "${query}"`;
+                } else {
+                    statsEl.textContent = `Found ${found} of ${total} items for "${query}"`;
+                }
+            } else {
+                const filter = document.getElementById('economyFilter').value;
+                let totalItems = taxonomyData.occupations.length + taxonomyData.groups.length;
+                
+                if (filter === 'seen') {
+                    totalItems = taxonomyData.occupations.filter(o => o.type === 'seen').length + 
+                               taxonomyData.groups.filter(g => g.type === 'seen').length;
+                } else if (filter === 'unseen') {
+                    totalItems = taxonomyData.occupations.filter(o => o.type === 'unseen').length + 
+                               taxonomyData.groups.filter(g => g.type === 'unseen').length;
+                }
+                
+                if (currentQuery) {
+                    statsEl.textContent = `Searching "${currentQuery}"...`;
+                } else {
+                    const filterText = filter === 'all' ? '' : ` (${filter} economy)`;
+                    statsEl.textContent = `${totalItems} items${filterText}`;
+                }
+            }
+        }
+
+        function debounce(func, wait) {
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(searchTimeout);
+                    func(...args);
+                };
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>
