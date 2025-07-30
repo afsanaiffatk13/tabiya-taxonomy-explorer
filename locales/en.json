@@ -1,0 +1,116 @@
+{
+  "header": {
+    "title": "Inclusive Livelihoods Taxonomy",
+    "subtitle": "Making visible and usable the human capital of everyone in an economy",
+    "learnMore": "Learn More"
+  },
+  "navigation": {
+    "about": "About",
+    "occupations": "Occupations",
+    "skills": "Skills",
+    "export": "Export",
+    "seenEconomy": "Seen Economy",
+    "unseenEconomy": "Unseen Economy"
+  },
+  "search": {
+    "placeholder": "Search taxonomy...",
+    "noResults": "No results found",
+    "tryDifferent": "Try different keywords or check your spelling",
+    "searching": "Searching",
+    "foundResults": "Found {count} of {total} items for \"{query}\"",
+    "itemsIn": "{count} items in {tab}"
+  },
+  "stats": {
+    "totalOccupations": "Total Occupations",
+    "occupationGroups": "Occupation Groups",
+    "skills": "Skills",
+    "skillRelations": "Skill Relations"
+  },
+  "about": {
+    "whatIs": "What is the Inclusive Livelihoods Taxonomy?",
+    "description": "A comprehensive framework that makes visible and usable the human capital of everyone in an economy. This taxonomy bridges the gap between formal and informal work, recognizing skills and capabilities across all economic activities.",
+    "gettingStarted": "Getting Started",
+    "gettingStartedDesc": "Explore the taxonomy by clicking on the tabs above. Use the language switcher to view content in English or Spanish.",
+    "browseOccupations": "Browse Occupations",
+    "exploreSkills": "Explore Skills",
+    "foundation": {
+      "title": "Foundation & Purpose",
+      "seenEconomy": "Seen Economy",
+      "seenEconomyDesc": "Traditional occupations based on ESCO (European Skills, Competences, Qualifications and Occupations) classifications that are typically measured and recognized in formal economic frameworks.",
+      "unseenEconomy": "Unseen Economy", 
+      "unseenEconomyDesc": "Previously unrecognized activities based on ICATUS (International Classification of Activities for Time Use Statistics) that generate important skills and experiences.",
+      "skillsIntegration": "Skills Integration",
+      "skillsIntegrationDesc": "The taxonomy includes comprehensive mappings between occupations and the skills required to perform them.",
+      "globalAdaptability": "Global Adaptability",
+      "globalAdaptabilityDesc": "Built on international standards, the taxonomy can be adapted to local contexts and labor markets while maintaining global compatibility."
+    }
+  },
+  "occupations": {
+    "title": "Occupations Explorer",
+    "description": "Browse and search through comprehensive occupation classifications covering both traditional formal work and previously unrecognized activities. Each occupation is mapped to relevant skills and grouped hierarchically for easy navigation.",
+    "seenEconomyTitle": "Seen Economy",
+    "seenEconomyDesc": "Traditional occupations based on ESCO classifications. These represent formal and informal employment sectors, professional roles, and income-generating activities typically recognized in economic frameworks as \"work\".",
+    "unseenEconomyTitle": "Unseen Economy",
+    "unseenEconomyDesc": "Previously unrecognized activities based on ICATUS time-use classifications. These include unpaid domestic work, care responsibilities, and community activities that generate valuable skills.",
+    "howToExplore": "How to Explore",
+    "searchDesc": "Use the search box to quickly find specific occupations by name, code, or description.",
+    "browseHierarchy": "Browse Hierarchy",
+    "browseHierarchyDesc": "Navigate through occupation groups to understand the structure and relationships.",
+    "selectItems": "Select Items",
+    "selectItemsDesc": "Click on any occupation to view detailed information, required skills, and related items."
+  },
+  "skills": {
+    "title": "Skills Explorer",
+    "description": "Explore the comprehensive skills framework that maps capabilities required across all occupations. Skills are organized hierarchically from broad competency areas to specific technical abilities, with clear relationships to occupations.",
+    "skillGroups": "Skill Groups",
+    "skillGroupsDesc": "Organized categories including Skills & Competencies, Knowledge domains, Transversal skills, and Language capabilities that provide structure to the skills framework.",
+    "individualSkills": "Individual Skills",
+    "individualSkillsDesc": "Specific capabilities and competencies that can be developed through various occupations and activities, mapped to show transferable skills across different roles.",
+    "skillOccupationLinks": "Skill-Occupation Links",
+    "skillOccupationLinksDesc": "Comprehensive mappings showing which skills are essential, optional, or related to specific occupations, enabling career pathway analysis and skills gap identification.",
+    "howToExplore": "How to Explore",
+    "skillCategories": "Skill Categories",
+    "skillCategoriesDesc": "Expand categories to explore skill groups and individual skills within each domain.",
+    "viewRelationships": "View Relationships",
+    "viewRelationshipsDesc": "Select skill groups to see sub-groups and skills, or select individual skills to see related occupations.",
+    "findApplications": "Find Applications",
+    "findApplicationsDesc": "Discover which occupations require specific skills and understand career pathways."
+  },
+  "details": {
+    "requiredSkills": "Required Skills",
+    "occupationsRequiring": "Occupations requiring this skill",
+    "subGroups": "Sub-groups",
+    "skillsInGroup": "Skills in this group",
+    "relatedOccupations": "Related Occupations",
+    "alternativeLabels": "Alternative Labels",
+    "noSkillsMapped": "No specific skills mapped for this occupation yet.",
+    "noOccupationsMapped": "No occupations currently mapped to this skill.",
+    "noSubGroups": "No sub-groups or skills found under this category.",
+    "essentialSkills": "Essential Skills",
+    "optionalSkills": "Optional Skills",
+    "relatedSkills": "Related Skills",
+    "knowledgeRequirements": "Knowledge Requirements",
+    "technicalSkills": "Technical Skills"
+  },
+  "loading": {
+    "taxonomy": "Loading taxonomy...",
+    "files": "Loading 7 data files...",
+    "language": "Loading {language} taxonomy..."
+  },
+  "errors": {
+    "failedToLoad": "Failed to Load {language} Files",
+    "dataLoadingIssue": "This might be a data loading issue.",
+    "checkFiles": "Make sure the data/{language}/ folder contains all required CSV files.",
+    "retry": "Retry",
+    "itemNotFound": "Item not found",
+    "couldNotFind": "Could not find {type} with code \"{code}\".",
+    "displayError": "Display Error",
+    "couldNotDisplay": "Could not display details for this item"
+  },
+  "empty": {
+    "selectToExplore": "Select an item to explore",
+    "selectDescription": "Click on an occupation, group, or skill from the sidebar to view detailed information, relationships, and required skills.",
+    "noItemsFound": "No items found",
+    "adjustCriteria": "Try adjusting your search criteria."
+  }
+}

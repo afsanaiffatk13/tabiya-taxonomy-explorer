@@ -1,0 +1,13 @@
+{
+  "name": "spanish-esco-converter",
+  "version": "1.0.0",
+  "description": "Convert Spanish ESCO data to Tabiya format",
+  "main": "spanish-converter.js",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
+  },
+  "scripts": {
+    "convert": "node spanish-converter.js"
+  }
+}

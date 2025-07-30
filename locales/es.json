@@ -1,0 +1,116 @@
+{
+  "header": {
+    "title": "Taxonomía de Medios de Vida Inclusivos",
+    "subtitle": "Haciendo visible y utilizable el capital humano de todos en una economía",
+    "learnMore": "Más Información"
+  },
+  "navigation": {
+    "about": "Acerca de",
+    "occupations": "Ocupaciones",
+    "skills": "Habilidades",
+    "export": "Exportar",
+    "seenEconomy": "Economía Visible",
+    "unseenEconomy": "Economía Invisible"
+  },
+  "search": {
+    "placeholder": "Buscar en la taxonomía...",
+    "noResults": "No se encontraron resultados",
+    "tryDifferent": "Prueba con diferentes palabras clave o verifica la ortografía",
+    "searching": "Buscando",
+    "foundResults": "Se encontraron {count} de {total} elementos para \"{query}\"",
+    "itemsIn": "{count} elementos en {tab}"
+  },
+  "stats": {
+    "totalOccupations": "Total de Ocupaciones",
+    "occupationGroups": "Grupos de Ocupaciones",
+    "skills": "Habilidades",
+    "skillRelations": "Relaciones de Habilidades"
+  },
+  "about": {
+    "whatIs": "¿Qué es la Taxonomía de Medios de Vida Inclusivos?",
+    "description": "Un marco integral que hace visible y utilizable el capital humano de todos en una economía. Esta taxonomía cierra la brecha entre el trabajo formal e informal, reconociendo las habilidades y capacidades en todas las actividades económicas.",
+    "gettingStarted": "Comenzar",
+    "gettingStartedDesc": "Explora la taxonomía haciendo clic en las pestañas de arriba. Usa el selector de idioma para ver el contenido en inglés o español.",
+    "browseOccupations": "Explorar Ocupaciones",
+    "exploreSkills": "Explorar Habilidades",
+    "foundation": {
+      "title": "Fundamento y Propósito",
+      "seenEconomy": "Economía Visible",
+      "seenEconomyDesc": "Ocupaciones tradicionales basadas en las clasificaciones ESCO (Habilidades, Competencias, Cualificaciones y Ocupaciones Europeas) que típicamente se miden y reconocen en marcos económicos formales.",
+      "unseenEconomy": "Economía Invisible",
+      "unseenEconomyDesc": "Actividades previamente no reconocidas basadas en ICATUS (Clasificación Internacional de Actividades para Estadísticas de Uso del Tiempo) que generan habilidades y experiencias importantes.",
+      "skillsIntegration": "Integración de Habilidades",
+      "skillsIntegrationDesc": "La taxonomía incluye mapeos integrales entre ocupaciones y las habilidades requeridas para realizarlas.",
+      "globalAdaptability": "Adaptabilidad Global",
+      "globalAdaptabilityDesc": "Construida sobre estándares internacionales, la taxonomía puede adaptarse a contextos locales y mercados laborales manteniendo compatibilidad global."
+    }
+  },
+  "occupations": {
+    "title": "Explorador de Ocupaciones",
+    "description": "Navega y busca a través de clasificaciones integrales de ocupaciones que cubren tanto el trabajo formal tradicional como actividades previamente no reconocidas. Cada ocupación está mapeada a habilidades relevantes y agrupada jerárquicamente para facilitar la navegación.",
+    "seenEconomyTitle": "Economía Visible",
+    "seenEconomyDesc": "Ocupaciones tradicionales basadas en clasificaciones ESCO. Estas representan sectores de empleo formal e informal, roles profesionales y actividades generadoras de ingresos típicamente reconocidas en marcos económicos como \"trabajo\".",
+    "unseenEconomyTitle": "Economía Invisible",
+    "unseenEconomyDesc": "Actividades previamente no reconocidas basadas en clasificaciones de uso del tiempo ICATUS. Estas incluyen trabajo doméstico no remunerado, responsabilidades de cuidado y actividades comunitarias que generan habilidades valiosas.",
+    "howToExplore": "Cómo Explorar",
+    "searchDesc": "Usa la caja de búsqueda para encontrar rápidamente ocupaciones específicas por nombre, código o descripción.",
+    "browseHierarchy": "Navegar Jerarquía",
+    "browseHierarchyDesc": "Navega a través de grupos de ocupaciones para entender la estructura y relaciones.",
+    "selectItems": "Seleccionar Elementos",
+    "selectItemsDesc": "Haz clic en cualquier ocupación para ver información detallada, habilidades requeridas y elementos relacionados."
+  },
+  "skills": {
+    "title": "Explorador de Habilidades",
+    "description": "Explora el marco integral de habilidades que mapea las capacidades requeridas en todas las ocupaciones. Las habilidades están organizadas jerárquicamente desde áreas de competencia amplias hasta habilidades técnicas específicas, con relaciones claras a las ocupaciones.",
+    "skillGroups": "Grupos de Habilidades",
+    "skillGroupsDesc": "Categorías organizadas incluyendo Habilidades y Competencias, dominios de Conocimiento, habilidades Transversales y capacidades de Idioma que proporcionan estructura al marco de habilidades.",
+    "individualSkills": "Habilidades Individuales",
+    "individualSkillsDesc": "Capacidades y competencias específicas que pueden desarrollarse a través de varias ocupaciones y actividades, mapeadas para mostrar habilidades transferibles entre diferentes roles.",
+    "skillOccupationLinks": "Enlaces Habilidad-Ocupación",
+    "skillOccupationLinksDesc": "Mapeos integrales que muestran qué habilidades son esenciales, opcionales o relacionadas con ocupaciones específicas, permitiendo análisis de trayectorias profesionales e identificación de brechas de habilidades.",
+    "howToExplore": "Cómo Explorar",
+    "skillCategories": "Categorías de Habilidades",
+    "skillCategoriesDesc": "Expande categorías para explorar grupos de habilidades y habilidades individuales dentro de cada dominio.",
+    "viewRelationships": "Ver Relaciones",
+    "viewRelationshipsDesc": "Selecciona grupos de habilidades para ver subgrupos y habilidades, o selecciona habilidades individuales para ver ocupaciones relacionadas.",
+    "findApplications": "Encontrar Aplicaciones",
+    "findApplicationsDesc": "Descubre qué ocupaciones requieren habilidades específicas y entiende las trayectorias profesionales."
+  },
+  "details": {
+    "requiredSkills": "Habilidades Requeridas",
+    "occupationsRequiring": "Ocupaciones que requieren esta habilidad",
+    "subGroups": "Subgrupos",
+    "skillsInGroup": "Habilidades en este grupo",
+    "relatedOccupations": "Ocupaciones Relacionadas",
+    "alternativeLabels": "Etiquetas Alternativas",
+    "noSkillsMapped": "Aún no se han mapeado habilidades específicas para esta ocupación.",
+    "noOccupationsMapped": "Actualmente no hay ocupaciones mapeadas a esta habilidad.",
+    "noSubGroups": "No se encontraron subgrupos o habilidades bajo esta categoría.",
+    "essentialSkills": "Habilidades Esenciales",
+    "optionalSkills": "Habilidades Opcionales",
+    "relatedSkills": "Habilidades Relacionadas",
+    "knowledgeRequirements": "Requisitos de Conocimiento",
+    "technicalSkills": "Habilidades Técnicas"
+  },
+  "loading": {
+    "taxonomy": "Cargando taxonomía...",
+    "files": "Cargando 7 archivos de datos...",
+    "language": "Cargando taxonomía en {language}..."
+  },
+  "errors": {
+    "failedToLoad": "Error al Cargar Archivos en {language}",
+    "dataLoadingIssue": "Esto podría ser un problema de carga de datos.",
+    "checkFiles": "Asegúrate de que la carpeta data/{language}/ contenga todos los archivos CSV requeridos.",
+    "retry": "Reintentar",
+    "itemNotFound": "Elemento no encontrado",
+    "couldNotFind": "No se pudo encontrar {type} con código \"{code}\".",
+    "displayError": "Error de Visualización",
+    "couldNotDisplay": "No se pudo mostrar los detalles de este elemento"
+  },
+  "empty": {
+    "selectToExplore": "Selecciona un elemento para explorar",
+    "selectDescription": "Haz clic en una ocupación, grupo o habilidad de la barra lateral para ver información detallada, relaciones y habilidades requeridas.",
+    "noItemsFound": "No se encontraron elementos",
+    "adjustCriteria": "Intenta ajustar tus criterios de búsqueda."
+  }
+}

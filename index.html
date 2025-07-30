@@ -165,6 +165,95 @@
             box-shadow: 0 4px 16px rgba(0, 255, 145, 0.3);
         }
 
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 4px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: var(--font-weight-semibold);
+            transition: all 0.2s ease;
+            font-family: var(--font-family-sans);
+        }
+
+        .lang-btn.active {
+            background: var(--tabiya-green);
+            color: var(--oxford-blue);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Localization Selector */
+        .localization-selector {
+            display: flex;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 4px;
+            margin-left: 12px;
+        }
+
+        .loc-btn {
+            background: transparent;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: var(--font-weight-semibold);
+            transition: all 0.2s ease;
+            font-family: var(--font-family-sans);
+        }
+
+        .loc-btn.active {
+            background: var(--tabiya-green);
+            color: var(--oxford-blue);
+        }
+
+        .loc-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Localization highlighting */
+        .localized-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-left: 6px;
+        }
+
+        .localized-addition {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .localized-alt-labels {
+            color: #ff6b35;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .tree-node.localized-item {
+            border-left: 3px solid #ff6b35;
+        }
+
         /* Enhanced Main Content */
         .main-content {
             background: var(--bg-white);
@@ -337,12 +426,23 @@
         }
 
         .sidebar {
-            width: 400px;
+            width: 420px; /* Increased from 400px */
+            min-width: 420px;
+            max-width: 420px;
             background: var(--bg-light);
-            padding: 32px;
+            padding: 32px 24px; /* Reduced horizontal padding */
             overflow-y: auto;
+            overflow-x: hidden; /* Prevent horizontal scroll */
             border-right: 1px solid var(--border-light);
         }
+
+        /* Ensure tree content doesn't overflow */
+        .tree-container {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+
 
         .main-panel {
             flex: 1;
@@ -422,15 +522,20 @@
         .tree-node {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 12px 16px 12px 28px; /* Adjusted for badge space */
+            border-radius: var(--radius-md);
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 14px;
             user-select: none;
             margin: 2px 0;
+            background: var(--white);
+            border: 1px solid transparent;
+            position: relative;
+            min-height: 44px; /* Ensure consistent height */
+            width: 100%;
+            box-sizing: border-box;
         }
-
         .tree-node:hover {
             background: var(--tabiya-soft-green);
         }
@@ -468,16 +573,20 @@
         .tree-code {
             font-family: var(--font-family-sans);
             font-weight: var(--font-weight-semibold);
-            margin-right: 16px;
+            margin-right: 12px;
             color: var(--tabiya-dark-green);
-            font-size: 15px;
+            font-size: 13px;
             background: rgba(36, 112, 102, 0.1);
-            padding: 6px 10px;
+            padding: 4px 8px;
             border-radius: var(--radius-sm);
-            min-width: 70px;
+            min-width: 60px;
+            max-width: 80px;
             text-align: center;
             flex-shrink: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+
 
         .tree-node.selected .tree-code {
             background: var(--tabiya-green);
@@ -501,7 +610,11 @@
         .tree-label {
             flex: 1;
             font-weight: 500;
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
+
 
         /* Enhanced children container with better spacing */
         .tree-children {
@@ -770,20 +883,19 @@
 
         /* Enhanced Responsive Design */
         @media (max-width: 1024px) {
-            .main-content {
-                margin: 16px;
-            }
-            
             .sidebar {
-                width: 350px;
-                padding: 24px;
+                width: 380px;
+                min-width: 380px;
+                max-width: 380px;
+                padding: 24px 20px;
             }
             
-            .main-panel {
-                padding: 24px;
+            .tree-code {
+                min-width: 50px;
+                max-width: 70px;
+                font-size: 12px;
             }
-        }
-
+        
         @media (max-width: 768px) {
             .header {
                 padding: 20px 24px;
@@ -867,8 +979,47 @@
             height: 56px;
             margin-right: 20px;
             border-radius: var(--radius-lg);
+
+        /* South African flag colors */
+        :root {
+            --za-green: #007A4D;  /* SA Flag green */
+            --za-red: #DE3831;    /* SA Flag red */
+        }
+
+        /* Updated localization badge styling */
+        .localized-badge {
+            font-size: 9px;
+            padding: 2px 4px;
+            background: var(--za-green);
+            color: white;
+            border-radius: 3px;
+            font-weight: bold;
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        /* Tree node positioning for badges */
+        .tree-node {
+            position: relative;
+            padding-left: 24px; /* Extra space for badge */
+        }
+
+        .tree-node.localized-item {
+            border-left: 3px solid var(--za-green);
+            background: rgba(0, 122, 77, 0.05);
+        }
+
+        /* Alternative red color option */
+        .localized-badge.red-variant {
+            background: var(--za-red);
+        }
+
         }
     </style>
+
 </head>
 <body>
     <!-- Debug indicator -->
@@ -885,6 +1036,10 @@
                 </div>
             </div>
             <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="switchLanguage('en')" id="lang-en">EN</button>
+                    <button class="lang-btn" onclick="switchLanguage('es')" id="lang-es">ES</button>
+                </div>
                 <a href="https://tabiya.org" class="btn-header" target="_blank">
                     <i class="fas fa-external-link-alt"></i> Learn More
                 </a>
@@ -906,7 +1061,7 @@
                         <li class="nav-tab active" onclick="switchMainTab('about', this)">
                             <i class="fas fa-info-circle"></i> About
                         </li>
-                       <li class="nav-tab" onclick="switchMainTab('occupations', this)">
+                    <li class="nav-tab" onclick="switchMainTab('occupations', this)">
                             <i class="fas fa-briefcase"></i> Occupations
                         </li>
                         <li class="nav-tab" onclick="switchMainTab('skills', this)">
@@ -914,10 +1069,22 @@
                         </li>
                     </ul>
                     
-                    <!-- Export button moved to top right -->
-                    <button class="export-button" onclick="exportData()">
-                        <i class="fas fa-download"></i> Export
-                    </button>
+                    <div style="display: flex; gap: 16px; align-items: center;">
+                        <!-- Localization selector (English only) -->
+                        <div class="localization-selector" id="localizationSelector" style="display: none;">
+                            <button class="loc-btn active" onclick="switchLocalization(null)" id="loc-base">
+                                🌍 Global
+                            </button>
+                            <button class="loc-btn" onclick="switchLocalization('za')" id="loc-za">
+                                🇿🇦 South Africa
+                            </button>
+                        </div>
+                        
+                        <!-- Export button -->
+                        <button class="export-button" onclick="exportData()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
                 </div>
                 
                 <!-- Sub-tabs for Occupations -->
@@ -969,7 +1136,13 @@
     </div>
 
     <script>
+        // Multi-language system
+        let currentLanguage = 'en';
+        let currentLocalization = null;
+        let translations = {};
         // Global state
+        let baseData = {};
+        let localizedData = {};
         let taxonomyData = {
             occupations: [],
             groups: [],
@@ -986,9 +1159,14 @@
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            loadTaxonomyData();
+            loadTranslations(); // Changed: load translations first
             setupEventListeners();
         });
+
+        // Set initial localization button visibility
+        setTimeout(() => {
+            updateLocalizationVisibility();
+        }, 100);
 
         function setupEventListeners() {
             const searchBox = document.getElementById('searchBox');
@@ -1003,9 +1181,241 @@
             });
         }
 
+        async function loadTranslations() {
+            try {
+                console.log("🌍 Loading translations...");
+                
+                // Load both language files
+                const [enResponse, esResponse] = await Promise.all([
+                    fetch('./locales/en.json'),
+                    fetch('./locales/es.json')
+                ]);
+
+                if (enResponse.ok && esResponse.ok) {
+                    translations.en = await enResponse.json();
+                    translations.es = await esResponse.json();
+                    
+                    console.log("✅ Translations loaded successfully");
+                    
+                    // Update UI with current language
+                    updateUITranslations();
+                    
+                    // Load taxonomy data after translations are ready
+                    loadTaxonomyData();
+                } else {
+                    console.warn("⚠️ Could not load translation files, using defaults");
+                    loadTaxonomyData();
+                }
+            } catch (error) {
+                console.error("❌ Error loading translations:", error);
+                loadTaxonomyData();
+            }
+        }
+
+        function updateUITranslations() {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const translation = getTranslation(key);
+                if (translation) {
+                    el.textContent = translation;
+                }
+            });
+
+            // Update placeholders
+            const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+            placeholderElements.forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                const translation = getTranslation(key);
+                if (translation) {
+                    el.placeholder = translation;
+                }
+            });
+
+            console.log(`🌍 UI updated to ${currentLanguage.toUpperCase()}`);
+        }
+
+        function getTranslation(key) {
+            const keys = key.split('.');
+            let value = translations[currentLanguage];
+            
+            for (const k of keys) {
+                if (value && typeof value === 'object') {
+                    value = value[k];
+                } else {
+                    return null;
+                }
+            }
+            
+            return value || null;
+        }
+
+        async function switchLanguage(lang) {
+            if (lang === currentLanguage) return;
+            
+            console.log(`🌍 Switching language from ${currentLanguage} to ${lang}`);
+            
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // Show/hide localization selector based on language
+            updateLocalizationVisibility();
+            
+            // If switching away from English, reset to global
+            if (lang !== 'en' && currentLocalization) {
+                console.log(`🌍 Switching away from English, resetting to Global localization`);
+                currentLocalization = null;
+                document.querySelectorAll('.loc-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById('loc-base').classList.add('active');
+            }
+            
+            // Update UI translations
+            updateUITranslations();
+            
+            // Show loading indicator
+            const container = document.getElementById('treeContainer');
+            if (container && currentMainTab !== 'about') {
+                container.innerHTML = `
+                    <div class="loading" style="text-align: center; padding: 40px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--oxford-blue); margin-bottom: 16px;"></i>
+                        <div style="color: var(--text-muted);">Loading ${lang.toUpperCase()} taxonomy...</div>
+                    </div>
+                `;
+            }
+            
+            try {
+                // Reload taxonomy data for new language
+                await loadTaxonomyData();
+                
+                console.log(`✅ Language switched to ${lang.toUpperCase()}`);
+                
+                // Update debug info
+                document.getElementById('debugInfo').textContent = `Language: ${lang.toUpperCase()} ✅`;
+                
+            } catch (error) {
+                console.error("❌ Error switching language:", error);
+                
+                // Show error state
+                if (container && currentMainTab !== 'about') {
+                    container.innerHTML = `
+                        <div class="error-state" style="text-align: center; padding: 40px;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #ffc107; margin-bottom: 16px;"></i>
+                            <h3>Failed to Load Language</h3>
+                            <p>Could not load ${lang.toUpperCase()} data: ${error.message}</p>
+                            <button onclick="switchLanguage('en')" class="btn-control" style="margin-top: 20px;">
+                                <i class="fas fa-language"></i> Switch to English
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+        async function switchLocalization(localization) {
+            if (localization === currentLocalization) return;
+            
+            console.log(`🌍 Switching localization from ${currentLocalization || 'base'} to ${localization || 'base'}`);
+            
+            currentLocalization = localization;
+            
+            // Update localization buttons
+            document.querySelectorAll('.loc-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`loc-${localization || 'base'}`).classList.add('active');
+            
+            // Show loading indicator
+            const container = document.getElementById('treeContainer');
+            if (container) {
+                container.innerHTML = `
+                    <div class="loading" style="text-align: center; padding: 40px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--oxford-blue); margin-bottom: 16px;"></i>
+                        <div style="color: var(--text-muted);">Loading ${localization ? localization.toUpperCase() : 'base'} data...</div>
+                    </div>
+                `;
+            }
+            
+            try {
+                // Reload data with new localization
+                await loadTaxonomyData();
+                
+                console.log(`✅ Localization switched to ${localization || 'Base'}`);
+                
+                // Update debug info
+                document.getElementById('debugInfo').textContent = `${localization || 'Base'} + ${currentLanguage.toUpperCase()} ✅`;
+                
+            } catch (error) {
+                console.error("❌ Error switching localization:", error);
+                
+                // Show error state
+                if (container) {
+                    container.innerHTML = `
+                        <div class="error-state" style="text-align: center; padding: 40px;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #ffc107; margin-bottom: 16px;"></i>
+                            <h3>Failed to Load Localization</h3>
+                            <p>Could not load ${localization || 'base'} data: ${error.message}</p>
+                            <button onclick="switchLocalization(null)" class="btn-control" style="margin-top: 20px;">
+                                <i class="fas fa-globe"></i> Switch to Global
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function updateLocalizationVisibility() {
+            const localizationSelector = document.getElementById('localizationSelector');
+            if (localizationSelector) {
+                // Only show when English is selected
+                localizationSelector.style.display = currentLanguage === 'en' ? 'flex' : 'none';
+                
+                console.log(`🌍 Localization buttons ${currentLanguage === 'en' ? 'shown' : 'hidden'} for language: ${currentLanguage}`);
+            }
+        }
+
+        function isLocalizedContent(item) {
+            return item.ISLOCALIZED === 'TRUE' || item.ISLOCALIZED === true || item.isLocalized === true;
+        }
+
+        function getLocalizationChanges(baseItem, localizedItem) {
+            const changes = {};
+            
+            if (!baseItem && localizedItem) {
+                // Completely new item
+                changes.type = 'new';
+                changes.isNew = true;
+            } else if (baseItem && localizedItem) {
+                // Modified item - check what changed
+                changes.type = 'modified';
+                changes.isNew = false;
+                
+                // Check alt labels
+                if (localizedItem.altLabels !== baseItem.altLabels) {
+                    changes.altLabelsAdded = getAddedAltLabels(baseItem.altLabels, localizedItem.altLabels);
+                }
+                
+                // Check description changes
+                if (localizedItem.description !== baseItem.description) {
+                    changes.descriptionChanged = true;
+                }
+            }
+            
+            return changes;
+        }
+
+        function getAddedAltLabels(baseLabels, localizedLabels) {
+            if (!baseLabels) return localizedLabels;
+            if (!localizedLabels) return '';
+            
+            const baseSet = new Set(baseLabels.split(/[,\n]/).map(l => l.trim().toLowerCase()));
+            const localizedSet = localizedLabels.split(/[,\n]/).map(l => l.trim());
+            
+            return localizedSet.filter(label => !baseSet.has(label.toLowerCase())).join(', ');
+        }
+
         // Enhanced data loading with REAL CSV files and FIXED skills integration
-        async function loadTaxonomyData() {
-            console.log("🚀 Loading REAL Tabiya taxonomy with FIXED skills integration...");
+        async function loadOriginalTaxonomyData() {
+            console.log(`🚀 Loading REAL ${currentLanguage.toUpperCase()} taxonomy with FIXED skills integration...`);
             
             try {
                 // Show loading indicator
@@ -1020,7 +1430,10 @@
                     `;
                 }
 
-                console.log("📁 Loading real CSV files...");
+                console.log(`📁 Loading ${currentLanguage} CSV files...`);
+                
+                // Use language-specific data folder
+                const dataPath = `./data/${currentLanguage}`;
                 
                 // Load all CSV files
                 const [
@@ -1032,13 +1445,13 @@
                     skillHierarchyResponse,
                     occupationToSkillsResponse
                 ] = await Promise.all([
-                    fetch('./data/occupations.csv'),
-                    fetch('./data/occupation_groups.csv'),
-                    fetch('./data/occupation_hierarchy.csv'),
-                    fetch('./data/skills.csv'),
-                    fetch('./data/skill_groups.csv'),
-                    fetch('./data/skill_hierarchy.csv'),
-                    fetch('./data/occupation_to_skill_relations.csv')
+                    fetch(`${dataPath}/occupations.csv`),
+                    fetch(`${dataPath}/occupation_groups.csv`),
+                    fetch(`${dataPath}/occupation_hierarchy.csv`),
+                    fetch(`${dataPath}/skills.csv`),
+                    fetch(`${dataPath}/skill_groups.csv`),
+                    fetch(`${dataPath}/skill_hierarchy.csv`),
+                    fetch(`${dataPath}/occupation_to_skill_relations.csv`)
                 ]);
 
                 // Check if all files loaded successfully
@@ -1406,7 +1819,7 @@
                     skillParentMap: skillParentMap
                 };
 
-                console.log("✅ REAL TAXONOMY DATA LOADED WITH FIXED SKILLS INTEGRATION!");
+                console.log(`✅ ${currentLanguage.toUpperCase()} TAXONOMY DATA LOADED WITH FIXED SKILLS INTEGRATION!`);
                 console.log("📊 Final Statistics:");
                 console.log(`   Total Items: ${stats.totalItems}`);
                 console.log(`   Occupations: ${stats.totalOccupations} (${stats.unseenOccupations} unseen, ${stats.seenOccupations} seen)`);
@@ -1424,42 +1837,565 @@
                 updateSearchStats();
                 updateTabBadges();
 
-                console.log("🎉 Full taxonomy explorer with FIXED NAVIGATION ready!");
+                console.log(`🎉 Full ${currentLanguage.toUpperCase()} taxonomy explorer with FIXED NAVIGATION ready!`);
 
             } catch (error) {
-                    console.error("❌ Failed to load CSV files:", error);
+                console.error("❌ Failed to load CSV files:", error);
 
-                    // ALWAYS show About panel first when on About tab
-                    if (currentMainTab === 'about') {
-                        showAboutPanel();
-                    }
-
-                    // Only show error in tree container if NOT on About tab
-                    if (currentMainTab !== 'about') {
-                        const container = document.getElementById('treeContainer');
-                        if (container) {
-                            container.innerHTML = `
-                                <div class="error-state" style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #ffc107; margin-bottom: 16px;"></i>
-                                    <h3>Failed to Load CSV Files</h3>
-                                    <p>Error: ${error.message}</p>
-                                    <p style="font-size: 14px; margin-top: 12px;">Make sure the data/ folder contains all required CSV files and the server is running.</p>
-                                    <button onclick="location.reload()" class="btn-control" style="margin-top: 20px;">
-                                        <i class="fas fa-refresh"></i> Retry
-                                    </button>
-                                </div>
-                            `;
-                        }
-                    }
-                }
+                // ALWAYS show About panel first when on About tab
                 if (currentMainTab === 'about') {
                     showAboutPanel();
                 }
-                // Update tab badges (they have fallback values)
-                updateTabBadges();
-            }
-        
 
+                // Only show error in tree container if NOT on About tab
+                if (currentMainTab !== 'about') {
+                    const container = document.getElementById('treeContainer');
+                    if (container) {
+                        container.innerHTML = `
+                            <div class="error-state" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #ffc107; margin-bottom: 16px;"></i>
+                                <h3>Failed to Load CSV Files</h3>
+                                <p>Error: ${error.message}</p>
+                                <p style="font-size: 14px; margin-top: 12px;">Make sure the data/ folder contains all required CSV files and the server is running.</p>
+                                <button onclick="location.reload()" class="btn-control" style="margin-top: 20px;">
+                                    <i class="fas fa-refresh"></i> Retry
+                                </button>
+                            </div>
+                        `;
+                    }
+                }
+            }
+            if (currentMainTab === 'about') {
+                showAboutPanel();
+            }
+            // Update tab badges (they have fallback values)
+            updateTabBadges();
+        }
+        
+        async function loadTaxonomyData() {
+            console.log(`🚀 Loading ${currentLanguage.toUpperCase()} taxonomy data...`);
+            
+            try {
+                // Try new structure first
+                console.log("📁 Loading base data...");
+                baseData = await loadDataFromPath(`./data/base/${currentLanguage}`);
+                console.log("✅ Base data loaded successfully");
+                console.log("📊 Base data stats:", {
+                    occupations: baseData.occupations?.length || 0,
+                    groups: baseData.groups?.length || 0,
+                    skills: baseData.skills?.length || 0
+                });
+                
+                // Load localized data if needed
+                if (currentLocalization) {
+                    console.log(`📁 Loading ${currentLocalization.toUpperCase()} localized data...`);
+                    try {
+                        localizedData = await loadDataFromPath(`./data/localized/${currentLocalization}/${currentLanguage}`);
+                        console.log("✅ Localized data loaded successfully");
+                        console.log("📊 Localized data stats:", {
+                            occupations: localizedData.occupations?.length || 0,
+                            groups: localizedData.groups?.length || 0,
+                            skills: localizedData.skills?.length || 0
+                        });
+                        
+                        // Count items with ISLOCALIZED=TRUE in loaded data
+                        const localizedOccs = localizedData.occupations?.filter(occ => 
+                            occ.ISLOCALIZED === 'TRUE' || occ.ISLOCALIZED === true
+                        ) || [];
+                        const localizedGroups = localizedData.groups?.filter(group => 
+                            group.ISLOCALIZED === 'TRUE' || group.ISLOCALIZED === true
+                        ) || [];
+                        const localizedSkills = localizedData.skills?.filter(skill => 
+                            skill.ISLOCALIZED === 'TRUE' || skill.ISLOCALIZED === true
+                        ) || [];
+                        
+                        console.log("🇿🇦 SA-specific items found:", {
+                            occupations: localizedOccs.length,
+                            groups: localizedGroups.length,
+                            skills: localizedSkills.length
+                        });
+                        
+                        if (localizedOccs.length > 0) {
+                            console.log("📋 Sample SA occupations:", localizedOccs.slice(0, 3).map(o => o.label));
+                        }
+                        
+                        // Compare and mark differences
+                        console.log("🔍 Marking localization differences...");
+                        markLocalizationDifferences(baseData, localizedData);
+                        
+                        // Check if differences were marked
+                        const markedOccs = localizedData.occupations?.filter(occ => occ.isLocalized) || [];
+                        console.log("✅ Items marked as localized:", markedOccs.length);
+                        
+                    } catch (locError) {
+                        console.warn("⚠️ Could not load localized data, using base data only:", locError);
+                        localizedData = baseData;
+                    }
+                }
+                
+                // Set active dataset
+                taxonomyData = currentLocalization ? localizedData : baseData;
+                
+                console.log(`✅ ${currentLanguage.toUpperCase()} data loaded for ${currentLocalization || 'base'}`);
+                console.log("📊 Active dataset structure:", {
+                    occupations: taxonomyData.occupations?.length || 0,
+                    groups: taxonomyData.groups?.length || 0,
+                    skills: taxonomyData.skills?.length || 0,
+                    stats: !!taxonomyData.stats,
+                    localizedItems: taxonomyData.occupations?.filter(o => o.isLocalized)?.length || 0
+                });
+                
+            } catch (error) {
+                console.error("❌ Failed to load new structure:", error);
+                
+                // Fallback to original logic
+                console.log("📁 Falling back to original data loading...");
+                await loadOriginalTaxonomyData();
+                return;
+            }
+            
+            // Update UI after successful data loading
+            if (currentMainTab === 'about') {
+                showAboutPanel();
+            } else if (currentMainTab === 'skills') {
+                renderSkillsTree();
+                showSkillsOverview();
+            } else {
+                renderTaxonomyTree();
+                showOccupationsOverview();
+            }
+            updateSearchStats();
+            updateTabBadges();
+        }
+        async function loadDataFromPath(dataPath) {
+            console.log(`📁 Loading CSV files from ${dataPath}...`);
+            
+            // Load all CSV files
+            const [
+                occupationsResponse, 
+                groupsResponse, 
+                hierarchyResponse,
+                skillsResponse,
+                skillGroupsResponse,
+                skillHierarchyResponse,
+                occupationToSkillsResponse
+            ] = await Promise.all([
+                fetch(`${dataPath}/occupations.csv`),
+                fetch(`${dataPath}/occupation_groups.csv`),
+                fetch(`${dataPath}/occupation_hierarchy.csv`),
+                fetch(`${dataPath}/skills.csv`),
+                fetch(`${dataPath}/skill_groups.csv`),
+                fetch(`${dataPath}/skill_hierarchy.csv`),
+                fetch(`${dataPath}/occupation_to_skill_relations.csv`)
+            ]);
+
+            // Check if all files loaded successfully
+            const responses = [
+                { name: 'occupations', response: occupationsResponse },
+                { name: 'groups', response: groupsResponse },
+                { name: 'hierarchy', response: hierarchyResponse },
+                { name: 'skills', response: skillsResponse },
+                { name: 'skill_groups', response: skillGroupsResponse },
+                { name: 'skill_hierarchy', response: skillHierarchyResponse },
+                { name: 'occupation_to_skills', response: occupationToSkillsResponse }
+            ];
+
+            for (const {name, response} of responses) {
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${name}.csv: ${response.status} ${response.statusText}`);
+                }
+            }
+
+            // Get text content from all files
+            const [
+                occupationsText, 
+                groupsText, 
+                hierarchyText,
+                skillsText,
+                skillGroupsText,
+                skillHierarchyText,
+                occupationToSkillsText
+            ] = await Promise.all([
+                occupationsResponse.text(),
+                groupsResponse.text(),
+                hierarchyResponse.text(),
+                skillsResponse.text(),
+                skillGroupsResponse.text(),
+                skillHierarchyResponse.text(),
+                occupationToSkillsResponse.text()
+            ]);
+
+            // Parse all CSV data using Papa Parse with CODE field preservation
+            const parseOptions = {
+                header: true,
+                dynamicTyping: (field) => {
+                    const codeFields = ['CODE', 'OCCUPATIONGROUPCODE', 'PARENTID', 'CHILDID', 'OCCUPATIONID', 'SKILLID'];
+                    return !codeFields.includes(field);
+                },
+                skipEmptyLines: true,
+                transformHeader: (header) => header.trim()
+            };
+
+            const occupationsParsed = Papa.parse(occupationsText, parseOptions);
+            const groupsParsed = Papa.parse(groupsText, parseOptions);
+            const hierarchyParsed = Papa.parse(hierarchyText, parseOptions);
+            const skillsParsed = Papa.parse(skillsText, parseOptions);
+            const skillGroupsParsed = Papa.parse(skillGroupsText, parseOptions);
+            const skillHierarchyParsed = Papa.parse(skillHierarchyText, parseOptions);
+            const occupationToSkillsParsed = Papa.parse(occupationToSkillsText, parseOptions);
+
+            // Process occupations
+            const processedOccupations = occupationsParsed.data
+                .filter(occ => occ.CODE && occ.PREFERREDLABEL)
+                .map(occ => {
+                    const code = occ.CODE.toString().trim();
+                    const isUnseen = code.startsWith('I');
+                    
+                    return {
+                        id: occ.ID,
+                        code: code,
+                        label: occ.PREFERREDLABEL.trim(),
+                        description: occ.DESCRIPTION ? occ.DESCRIPTION.substring(0, 300).trim() : '',
+                        altLabels: occ.ALTLABELS ? occ.ALTLABELS.trim() : '',
+                        type: isUnseen ? 'unseen' : 'seen',
+                        groupCode: occ.OCCUPATIONGROUPCODE ? occ.OCCUPATIONGROUPCODE.toString().trim() : '',
+                        occupationType: occ.OCCUPATIONTYPE || '',
+                        // Add ISLOCALIZED field for localization support
+                        ISLOCALIZED: occ.ISLOCALIZED || false
+                    };
+                });
+
+            // Build hierarchy maps
+            const groupById = {};
+            const occById = {};
+            
+            groupsParsed.data.forEach(group => {
+                if (group.ID) groupById[group.ID] = group;
+            });
+            
+            processedOccupations.forEach(occ => {
+                if (occ.id) occById[occ.id] = occ;
+            });
+
+            const hierarchyMap = {};
+            const parentMap = {};
+            
+            hierarchyParsed.data.forEach(rel => {
+                if (rel.PARENTID && rel.CHILDID) {
+                    if (!hierarchyMap[rel.PARENTID]) {
+                        hierarchyMap[rel.PARENTID] = [];
+                    }
+                    hierarchyMap[rel.PARENTID].push(rel.CHILDID);
+                    parentMap[rel.CHILDID] = rel.PARENTID;
+                }
+            });
+
+            // Process groups
+            const processedGroups = groupsParsed.data
+                .filter(group => group.CODE && group.PREFERREDLABEL)
+                .map(group => {
+                    const code = group.CODE.toString().trim();
+                    const isUnseen = code.startsWith('I');
+                    
+                    let level = 1;
+                    if (isUnseen) {
+                        if (code.includes('_')) {
+                            const parts = code.split('_');
+                            level = parts.length + 1;
+                        } else if (code.length > 2) {
+                            level = 2;
+                        }
+                    } else {
+                        const cleanCode = code.replace(/^0+/, '');
+                        level = Math.max(1, cleanCode.length);
+                    }
+                    
+                    const childIds = hierarchyMap[group.ID] || [];
+                    const children = childIds.map(childId => {
+                        const childGroup = groupById[childId];
+                        const childOcc = occById[childId];
+                        
+                        if (childGroup && childGroup.CODE) {
+                            return childGroup.CODE.toString().trim();
+                        }
+                        if (childOcc && childOcc.code) {
+                            return childOcc.code;
+                        }
+                        return null;
+                    }).filter(Boolean);
+                    
+                    const parentId = parentMap[group.ID];
+                    const parent = parentId ? groupById[parentId] : null;
+                    const parentCode = parent && parent.CODE ? parent.CODE.toString().trim() : undefined;
+                    
+                    return {
+                        id: group.ID,
+                        code: code,
+                        label: group.PREFERREDLABEL.trim(),
+                        description: group.DESCRIPTION ? group.DESCRIPTION.substring(0, 400).trim() : '',
+                        altLabels: group.ALTLABELS ? group.ALTLABELS.trim() : '',
+                        type: isUnseen ? 'unseen' : 'seen',
+                        level: level,
+                        groupType: group.GROUPTYPE || '',
+                        children: children,
+                        parent: parentCode,
+                        // Add ISLOCALIZED field for localization support  
+                        ISLOCALIZED: group.ISLOCALIZED || false
+                    };
+                });
+
+            // Create skills master from skill_hierarchy.csv as foundation
+            console.log("🔧 Building Skills Master from skill_hierarchy.csv foundation...");
+            
+            // Step 1: Build hierarchy maps using MongoDB IDs
+            const skillHierarchyMap = {};
+            const skillParentMap = {};
+            
+            skillHierarchyParsed.data.forEach(rel => {
+                if (rel.PARENTID && rel.CHILDID) {
+                    // Parent to children map
+                    if (!skillHierarchyMap[rel.PARENTID]) {
+                        skillHierarchyMap[rel.PARENTID] = [];
+                    }
+                    skillHierarchyMap[rel.PARENTID].push(rel.CHILDID);
+                    
+                    // Child to parent map
+                    skillParentMap[rel.CHILDID] = rel.PARENTID;
+                }
+            });
+
+            // Step 2: Create lookup maps for enrichment
+            const skillDataById = {};
+            const skillGroupDataById = {};
+            
+            // Index skills by ID
+            skillsParsed.data.forEach(skill => {
+                if (skill.ID) {
+                    skillDataById[skill.ID] = skill;
+                }
+            });
+            
+            // Index skill groups by ID
+            skillGroupsParsed.data.forEach(group => {
+                if (group.ID) {
+                    skillGroupDataById[group.ID] = group;
+                }
+            });
+
+            // Step 3: Create Skills Master - each CHILDID from hierarchy becomes an enriched item
+            const skillsMaster = {};
+            const allChildIds = new Set();
+            
+            // Collect all CHILDIDs from hierarchy
+            skillHierarchyParsed.data.forEach(rel => {
+                if (rel.CHILDID) {
+                    allChildIds.add(rel.CHILDID);
+                }
+            });
+
+            console.log(`📊 Processing ${allChildIds.size} unique CHILDIDs from hierarchy...`);
+
+            // Enrich each CHILDID with data from skills/skill_groups CSVs
+            allChildIds.forEach(childId => {
+                let enrichedItem = {
+                    id: childId,
+                    parentId: skillParentMap[childId],
+                    childrenIds: skillHierarchyMap[childId] || []
+                };
+
+                // Check if it's a skill or skill group
+                const skillData = skillDataById[childId];
+                const skillGroupData = skillGroupDataById[childId];
+
+                if (skillData) {
+                    // It's an individual skill
+                    enrichedItem = {
+                        ...enrichedItem,
+                        type: 'skill',
+                        label: skillData.PREFERREDLABEL?.trim() || 'Unknown Skill',
+                        description: skillData.DESCRIPTION?.substring(0, 300).trim() || '',
+                        altLabels: skillData.ALTLABELS?.trim() || '',
+                        skillType: skillData.SKILLTYPE || 'General',
+                        reuseLevel: skillData.REUSELEVEL || '',
+                        isClickable: true,
+                        isSearchable: false, // Individual skills not searchable
+                        ISLOCALIZED: skillData.ISLOCALIZED || false
+                    };
+                } else if (skillGroupData) {
+                    // It's a skill group
+                    let code = skillGroupData.CODE?.toString().trim() || childId;
+                    let category = 'Other';
+                    
+                    // Determine category from CODE
+                    if (code.startsWith('S')) {
+                        category = 'Skills and competencies';
+                    } else if (code.startsWith('L')) {
+                        category = 'Language';
+                    } else if (code.startsWith('T')) {
+                        category = 'Transversal skills';
+                    } else if (skillGroupData.ORIGINURI?.includes('isced-f')) {
+                        category = 'Knowledge';
+                        const match = skillGroupData.ORIGINURI.match(/isced-f\/(\d+)/);
+                        if (match) {
+                            code = match[1];
+                        }
+                    }
+
+                    enrichedItem = {
+                        ...enrichedItem,
+                        type: 'skillgroup',
+                        code: code,
+                        label: skillGroupData.PREFERREDLABEL?.trim() || 'Unknown Group',
+                        description: skillGroupData.DESCRIPTION?.substring(0, 300).trim() || '',
+                        altLabels: skillGroupData.ALTLABELS?.trim() || '',
+                        category: category,
+                        isClickable: true,
+                        isSearchable: true,
+                        ISLOCALIZED: skillGroupData.ISLOCALIZED || false
+                    };
+                } else {
+                    // Orphaned hierarchy item
+                    console.warn(`⚠️ Orphaned hierarchy item: ${childId}`);
+                    enrichedItem = {
+                        ...enrichedItem,
+                        type: 'unknown',
+                        label: `Unknown Item (${childId})`,
+                        isClickable: false,
+                        isSearchable: false
+                    };
+                }
+
+                skillsMaster[childId] = enrichedItem;
+            });
+
+            // Step 4: Separate into skills and skill groups for compatibility
+            const processedSkills = Object.values(skillsMaster).filter(item => item.type === 'skill');
+            const processedSkillGroups = Object.values(skillsMaster).filter(item => 
+                item.type === 'skillgroup' && item.category !== 'Other'
+            );
+
+            console.log(`✅ Skills Master created:`);
+            console.log(`   - Individual skills: ${processedSkills.length} (clickable, not searchable)`);
+            console.log(`   - Skill groups: ${processedSkillGroups.length} (clickable, searchable)`);
+            console.log(`   - Total hierarchy items: ${Object.keys(skillsMaster).length}`);
+
+            // Process occupation-to-skill relationships with proper ID mapping
+            const processedOccupationToSkills = occupationToSkillsParsed.data
+                .filter(rel => {
+                    const hasOccId = rel.OCCUPATIONID && rel.OCCUPATIONID.toString().trim();
+                    const hasSkillId = rel.SKILLID && rel.SKILLID.toString().trim();
+                    return hasOccId && hasSkillId;
+                })
+                .map(rel => ({
+                    occupationId: rel.OCCUPATIONID.toString().trim(),
+                    skillId: rel.SKILLID.toString().trim(),
+                    relationType: rel.RELATIONTYPE || 'related',
+                    signallingValue: rel.SIGNALLINGVALUE || 0,
+                    signallingValueLabel: rel.SIGNALLINGVALUELABEL || ''
+                }));
+
+            // Create ID-to-Code mapping for lookups
+            const occupationIdToCode = {};
+            processedOccupations.forEach(occ => {
+                if (occ.id) occupationIdToCode[occ.id] = occ.code;
+            });
+
+            const skillIdToCode = {};
+            processedSkills.forEach(skill => {
+                if (skill.id) skillIdToCode[skill.id] = skill.code;
+            });
+
+            // Calculate statistics
+            const unseenOccs = processedOccupations.filter(o => o.type === 'unseen');
+            const seenOccs = processedOccupations.filter(o => o.type === 'seen');
+            const unseenGroups = processedGroups.filter(g => g.type === 'unseen');
+            const seenGroups = processedGroups.filter(g => g.type === 'seen');
+
+            const stats = {
+                totalOccupations: processedOccupations.length,
+                totalGroups: processedGroups.length,
+                totalSkills: processedSkills.length,
+                totalSkillGroups: processedSkillGroups.length,
+                totalItems: processedOccupations.length + processedGroups.length + processedSkills.length,
+                unseenOccupations: unseenOccs.length,
+                unseenGroups: unseenGroups.length,
+                unseenTotal: unseenOccs.length + unseenGroups.length,
+                seenOccupations: seenOccs.length,
+                seenGroups: seenGroups.length,
+                seenTotal: seenOccs.length + seenGroups.length,
+                occupationSkillRelations: processedOccupationToSkills.length
+            };
+
+            // Return the processed data object instead of setting global taxonomyData
+            return {
+                occupations: processedOccupations,
+                groups: processedGroups,
+                skills: processedSkills,
+                skillGroups: processedSkillGroups,
+                occupationToSkills: processedOccupationToSkills,
+                stats: stats,
+                occupationIdToCode: occupationIdToCode,
+                skillIdToCode: skillIdToCode,
+                occupationCodeToId: Object.fromEntries(Object.entries(occupationIdToCode).map(([id, code]) => [code, id])),
+                skillCodeToId: Object.fromEntries(Object.entries(skillIdToCode).map(([id, code]) => [code, id])),
+                skillsMaster: skillsMaster,
+                skillHierarchyMap: skillHierarchyMap,
+                skillParentMap: skillParentMap
+            };
+        }
+
+        function markLocalizationDifferences(baseData, localizedData) {
+            console.log("🔍 Starting localization difference marking...");
+            
+            let markedCount = 0;
+            
+            // Mark new/modified occupations
+            localizedData.occupations.forEach(localizedOcc => {
+                // Check if item has ISLOCALIZED field set
+                if (localizedOcc.ISLOCALIZED === 'TRUE' || localizedOcc.ISLOCALIZED === true) {
+                    console.log(`🏷️ Marking occupation as localized: ${localizedOcc.label}`);
+                    
+                    const baseOcc = baseData.occupations.find(b => b.code === localizedOcc.code);
+                    const changes = getLocalizationChanges(baseOcc, localizedOcc);
+                    
+                    localizedOcc.localizationChanges = changes;
+                    localizedOcc.isLocalized = true;
+                    markedCount++;
+                }
+            });
+            
+            // Mark new/modified groups
+            localizedData.groups.forEach(localizedGroup => {
+                if (localizedGroup.ISLOCALIZED === 'TRUE' || localizedGroup.ISLOCALIZED === true) {
+                    console.log(`🏷️ Marking group as localized: ${localizedGroup.label}`);
+                    
+                    const baseGroup = baseData.groups.find(b => b.code === localizedGroup.code);
+                    const changes = getLocalizationChanges(baseGroup, localizedGroup);
+                    
+                    localizedGroup.localizationChanges = changes;
+                    localizedGroup.isLocalized = true;
+                    markedCount++;
+                }
+            });
+            
+            // Mark new/modified skills  
+            localizedData.skills.forEach(localizedSkill => {
+                if (localizedSkill.ISLOCALIZED === 'TRUE' || localizedSkill.ISLOCALIZED === true) {
+                    console.log(`🏷️ Marking skill as localized: ${localizedSkill.label}`);
+                    
+                    const baseSkill = baseData.skills.find(b => b.id === localizedSkill.id);
+                    const changes = getLocalizationChanges(baseSkill, localizedSkill);
+                    
+                    localizedSkill.localizationChanges = changes;
+                    localizedSkill.isLocalized = true;
+                    markedCount++;
+                }
+            });
+            
+            console.log(`✅ Localization differences marked: ${markedCount} items`);
+        }
+
+        
         // Enhanced tab switching with proper skills tree rendering
         function switchMainTab(tab, element) {
             console.log(`🔧 Switching to main tab: ${tab}`);
@@ -1789,6 +2725,18 @@
             
             console.log(`🔧 Rendering tree for ${currentSubTab}`);
             
+            // Add safety checks for undefined data
+            if (!taxonomyData || !taxonomyData.groups) {
+                console.warn("⚠️ taxonomyData.groups not available yet");
+                container.innerHTML = `
+                    <div class="loading" style="text-align: center; padding: 40px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--oxford-blue); margin-bottom: 16px;"></i>
+                        <div style="color: var(--text-muted);">Loading taxonomy data...</div>
+                    </div>
+                `;
+                return;
+            }
+            
             if (currentSubTab === 'seen-occupations') {
                 const seenGroups = taxonomyData.groups.filter(g => 
                     g.type === 'seen' && 
@@ -1812,7 +2760,6 @@
             container.innerHTML = html;
             console.log(`✅ Tree rendered with ${html.length} characters`);
         }
-
         // Skills tree with proper hierarchy including individual skills
         function renderSkillsTree() {
             const container = document.getElementById('treeContainer');
@@ -1898,6 +2845,24 @@
             
             container.innerHTML = html;
             console.log(`✅ Complete skills tree rendered successfully with ${hasContent ? 'content' : 'no content'}`);
+        }
+
+        function renderTreeNodeWithLocalization(item, type, code) {
+            const isLocalized = isLocalizedContent(item);
+            const localizationClass = isLocalized ? 'localized-item' : '';
+            const badge = isLocalized ? '<span class="localized-badge">Local</span>' : '';
+            
+            // Determine if it's a new addition
+            const isNewAddition = item.localizationChanges?.isNew;
+            const additionClass = isNewAddition ? 'localized-addition' : '';
+            
+            return `
+                <div class="tree-node ${localizationClass} ${additionClass}" onclick="selectItem('${code}', '${type}', event)" data-code="${code}">
+                    <div class="tree-toggle"></div>
+                    ${item.code ? `<span class="tree-code">${item.code}</span>` : ''}
+                    <span class="tree-label">${item.label}${badge}</span>
+                </div>
+            `;
         }
 
         function renderCompleteSkillHierarchy(groups, category) {
@@ -2093,9 +3058,15 @@
                     `<div class="tree-toggle" onclick="toggleGroupNode('${group.code}', event)"><i class="fas fa-chevron-right"></i></div>` : 
                     '<div class="tree-toggle"></div>';
                 
+                // Add localization styling
+                const isLocalized = group.isLocalized || (group.ISLOCALIZED === 'TRUE' || group.ISLOCALIZED === true);
+                const localizationClass = isLocalized ? 'localized-item' : '';
+                const badge = isLocalized ? '<span class="localized-badge">ZA</span>' : '';
+                
                 html += `
                     <div class="tree-item">
-                        <div class="tree-node ${hasChildren ? 'has-children' : ''}" onclick="selectItem('${group.code}', 'group', event)" data-code="${group.code}">
+                        <div class="tree-node ${hasChildren ? 'has-children' : ''} ${localizationClass}" onclick="selectItem('${group.code}', 'group', event)" data-code="${group.code}">
+                            ${badge}
                             ${toggle}
                             <span class="tree-code">${group.code}</span>
                             <span class="tree-label">${group.label}</span>
@@ -2118,9 +3089,15 @@
             });
             
             childOccupations.forEach(occ => {
+                // Add localization styling
+                const isLocalized = occ.isLocalized || (occ.ISLOCALIZED === 'TRUE' || occ.ISLOCALIZED === true);
+                const localizationClass = isLocalized ? 'localized-item' : '';
+                const badge = isLocalized ? '<span class="localized-badge">ZA</span>' : '';
+                
                 html += `
                     <div class="tree-item">
-                        <div class="tree-node" onclick="selectItem('${occ.code}', 'occupation', event)" data-code="${occ.code}" ondblclick="selectItem('${occ.code}', 'occupation', event)" data-code="${occ.code}">
+                        <div class="tree-node ${localizationClass}" onclick="selectItem('${occ.code}', 'occupation', event)" data-code="${occ.code}" ondblclick="selectItem('${occ.code}', 'occupation', event)">
+                            ${badge}
                             <div class="tree-toggle"></div>
                             <span class="tree-code">${occ.code}</span>
                             <span class="tree-label">${occ.label}</span>
@@ -2265,6 +3242,9 @@
                     </div>
                 ` : '';
 
+                // SA Localization info (MOVED TO BE AFTER ALT LABELS)
+                const localizationInfo = renderLocalizationInfo(item);
+
                 // Skills section for occupations
                 const skillsSection = (item.type === 'occupation') ? renderOccupationSkills(item) : '';
                 
@@ -2281,6 +3261,7 @@
                     </div>
                     
                     ${altLabelsSection}
+                    ${localizationInfo}
                     ${skillsSection}
                     ${relatedSection}
                 `;
@@ -2299,6 +3280,34 @@
                 `;
             }
         }
+
+        function renderLocalizationInfo(item) {
+            if (!currentLocalization || !isLocalizedContent(item)) {
+                return '';
+            }
+            
+            const changes = item.localizationChanges || {};
+            let infoHtml = '';
+            
+            if (changes.isNew) {
+                infoHtml = `
+                    <div class="localization-info" style="background: var(--tabiya-light-green); padding: 20px; border-radius: var(--radius-lg); margin: 24px 0; border-left: 4px solid var(--tabiya-green);">
+                        <h5 style="color: var(--oxford-blue); margin-bottom: 12px; font-weight: var(--font-weight-bold);">🇿🇦 South African Addition</h5>
+                        <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">This ${item.type} was added specifically for the South African context.</p>
+                    </div>
+                `;
+            } else if (changes.altLabelsAdded) {
+                infoHtml = `
+                    <div class="localization-info" style="background: var(--tabiya-light-green); padding: 20px; border-radius: var(--radius-lg); margin: 24px 0; border-left: 4px solid var(--tabiya-green);">
+                        <h5 style="color: var(--oxford-blue); margin-bottom: 12px; font-weight: var(--font-weight-bold);">🇿🇦 South African Terms Added</h5>
+                        <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">Additional local terms: <span style="color: var(--oxford-blue); font-weight: var(--font-weight-semibold);">${changes.altLabelsAdded}</span></p>
+                    </div>
+                `;
+            }
+            
+            return infoHtml;
+        }
+
 
         // Generate breadcrumb navigation with separate logic for skill groups vs individual skills
         function generateBreadcrumb(item) {
@@ -2779,17 +3788,22 @@
         }
 
         function getTabItemCount() {
+            // Add safety checks for undefined data
+            if (!taxonomyData || !taxonomyData.stats) {
+                console.warn("⚠️ taxonomyData.stats not available yet");
+                return 0;
+            }
+            
             if (currentMainTab === 'skills') {
                 // Only count skill groups (not individual skills)
-                return taxonomyData.skillGroups.length;
+                return taxonomyData.stats.totalSkillGroups || 0;
             } else if (currentSubTab === 'seen-occupations') {
-                return taxonomyData.stats?.seenTotal || 0;
+                return taxonomyData.stats.seenTotal || 0;
             } else if (currentSubTab === 'unseen-occupations') {
-                return taxonomyData.stats?.unseenTotal || 0;
+                return taxonomyData.stats.unseenTotal || 0;
             }
             return 0;
         }
-
         function renderSearchResults(results, query) {
             const container = document.getElementById('treeContainer');
             
@@ -2842,7 +3856,7 @@
 
         function exportData() {
             let dataToExport = [];
-            let filename = 'tabiya-taxonomy';
+            let filename = `tabiya-taxonomy-${currentLanguage}`;
             
             if (currentSubTab === 'seen-occupations') {
                 dataToExport = [
@@ -2924,6 +3938,12 @@
         }
 
         function updateTabBadges() {
+            // Add safety checks for undefined data
+            if (!taxonomyData || !taxonomyData.stats) {
+                console.warn("⚠️ taxonomyData.stats not available for badge updates");
+                return;
+            }
+            
             // Update the actual counts in tab badges
             const occupationsTab = document.querySelector('.nav-tab .tab-badge');
             const skillsTab = document.getElementById('skillsTabBadge');
@@ -2947,7 +3967,6 @@
                 unseenSubTab.textContent = taxonomyData.stats.unseenTotal.toLocaleString();
             }
         }
-
         function debounce(func, wait) {
             return function executedFunction(...args) {
                 const later = () => {
