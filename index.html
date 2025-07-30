@@ -977,9 +977,22 @@
         .logo-image {
             width: 56px;
             height: 56px;
+            max-width: 56px;
+            max-height: 56px;
             margin-right: 20px;
             border-radius: var(--radius-lg);
+            object-fit: contain; /* Ensures logo maintains aspect ratio */
+        }
 
+        @media (max-width: 768px) {
+            .logo-image {
+                width: 40px;
+                height: 40px;
+                max-width: 40px;
+                max-height: 40px;
+            }
+        }
+        
         /* South African flag colors */
         :root {
             --za-green: #007A4D;  /* SA Flag green */
