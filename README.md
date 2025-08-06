@@ -310,7 +310,3 @@ App
 - **HTTPS only**: Secure transmission
 
 ---
-
-**Built with ❤️ by [Tabiya](https://tabiya.org)**
-
-*Making visible and usable the human capital of everyone in an economy*
