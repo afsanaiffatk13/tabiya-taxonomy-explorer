@@ -5708,7 +5708,13 @@
 
         //URL Parsing & Generation Functions
         function parseURL(pathname, search = '') {
-            const segments = pathname.split('/').filter(Boolean);
+            // Remove the base path if present
+            let cleanPath = pathname;
+            if (window.location.hostname === 'tabiya-tech.github.io' && pathname.startsWith('/tabiya-taxonomy-explorer')) {
+                cleanPath = pathname.replace('/tabiya-taxonomy-explorer', '');
+            }
+            
+            const segments = cleanPath.split('/').filter(Boolean);
             
             // Parse lang-localization from first segment
             const langLoc = segments[0] || 'en-base';
@@ -5728,18 +5734,23 @@
         }
 
         function generateURL(state) {
+            // Always include the base path for GitHub Pages
+            const basePath = window.location.hostname === 'tabiya-tech.github.io' 
+                ? '/tabiya-taxonomy-explorer' 
+                : '';
+                
             const langLoc = `${state.lang}-${state.localization}`;
             
             if (state.searchQuery) {
-                return `/${langLoc}/search?q=${encodeURIComponent(state.searchQuery)}`;
+                return `${basePath}/${langLoc}/search?q=${encodeURIComponent(state.searchQuery)}`;
             }
             
             if (state.itemId) {
-                return `/${langLoc}/${state.taxonomy}/${state.itemId}`;
+                return `${basePath}/${langLoc}/${state.taxonomy}/${state.itemId}`;
             }
-            
-            return `/${langLoc}/${state.taxonomy}`;
-        }
+    
+    return `${basePath}/${langLoc}/${state.taxonomy}`;
+}
 
         function updateURL(newState, replaceState = false) {
             Object.assign(urlState, newState);
