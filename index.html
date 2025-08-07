@@ -2218,12 +2218,17 @@
                 // Determine the correct data path based on language and localization
                 let dataPath;
                 
+                // Get the base path for GitHub Pages deployment
+                const basePath = window.location.pathname.includes('/tabiya-taxonomy-explorer') 
+                    ? '/tabiya-taxonomy-explorer' 
+                    : '';
+
                 if (currentLocalization === 'za' && currentLanguage === 'en') {
                     // South African English
-                    dataPath = './data/localized/za/en';
+                    dataPath = `${basePath}/data/localized/za/en`;
                 } else {
                     // Base language data (en or es)
-                    dataPath = `./data/base/${currentLanguage}`;
+                    dataPath = `${basePath}/data/base/${currentLanguage}`;
                 }
                 
                 // Load the appropriate data
