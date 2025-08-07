@@ -2219,7 +2219,7 @@
                 let dataPath;
                 
                 // Get the base path for GitHub Pages deployment
-                const basePath = window.location.pathname.includes('/tabiya-taxonomy-explorer') 
+                const basePath = window.location.hostname === 'tabiya-tech.github.io' 
                     ? '/tabiya-taxonomy-explorer' 
                     : '';
 
@@ -2230,6 +2230,7 @@
                     // Base language data (en or es)
                     dataPath = `${basePath}/data/base/${currentLanguage}`;
                 }
+
                 
                 // Load the appropriate data
                 baseData = await loadDataFromPath(dataPath);
