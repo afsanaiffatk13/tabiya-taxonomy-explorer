@@ -1735,7 +1735,6 @@
                 // Only show when English is selected
                 localizationSelector.style.display = currentLanguage === 'en' ? 'flex' : 'none';
                 
-                console.log(`🌍 Localization buttons ${currentLanguage === 'en' ? 'shown' : 'hidden'} for language: ${currentLanguage}`);
             }
         }
 
@@ -1854,7 +1853,6 @@
                     occupationToSkillsResponse.text()
                 ]);
 
-                console.log("✅ All CSV files loaded successfully");
 
                 // Parse all CSV data using Papa Parse with CODE field preservation
                 const parseOptions = {
@@ -2238,7 +2236,7 @@
                 // For localization, we need to also load base data for comparison
                 if (currentLocalization === 'za') {
                     try {
-                        const baseEnglishData = await loadDataFromPath('./data/base/en');
+                        const baseEnglishData = await loadDataFromPath(`${basePath}/data/base/en`);
                         
                         // Mark localization differences
                         markLocalizationDifferences(baseEnglishData, baseData);
@@ -3330,7 +3328,6 @@
         
         // Skills tree with proper hierarchy including individual skills
         async function renderSkillsTreeOptimized() {
-            console.log(`🔧 Rendering SKILLS tree using unified toggle functions`);
             
             const container = document.getElementById('treeContainer');
             
@@ -3369,7 +3366,6 @@
             for (const category of categoryOrder) {
                 if (skillGroupsByCategory[category]) {
                     const groups = skillGroupsByCategory[category];
-                    console.log(`📊 Rendering skills category ${category} with ${groups.length} groups`);
                     
                     // Use the same pattern as occupation groups - just use category as the "code"
                     const categoryCode = category.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
@@ -3402,7 +3398,6 @@
             }
             
             container.innerHTML = skillsHtml;
-            console.log(`✅ Skills tree rendered successfully using unified toggle system`);
         }
         
         // Update original function to call optimized version
@@ -3456,7 +3451,6 @@
 
         // Enhanced skill rendering with proper on-demand loading - FIXED
         function renderSkillGroupWithChildren(groupId) {
-            console.log(`🔧 Rendering children for skill group: ${groupId}`);
             
             const group = taxonomyData.skillsMaster[groupId];
             if (!group || group.type !== 'skillgroup') {
@@ -3466,7 +3460,6 @@
             
             // Get IMMEDIATE children only
             const childrenIds = group.childrenIds || [];
-            console.log(`🔧 Found ${childrenIds.length} children for ${group.code} (${group.label})`);
             
             if (childrenIds.length === 0) {
                 return '<div style="padding: 16px; color: var(--text-muted); font-style: italic;">No sub-items found</div>';
@@ -3478,7 +3471,6 @@
             const childGroups = children.filter(child => child.type === 'skillgroup');
             const childSkills = children.filter(child => child.type === 'skill');
             
-            console.log(`🔧 ${childGroups.length} child groups, ${childSkills.length} child skills`);
             
             let html = '';
             
@@ -3528,7 +3520,6 @@
                 `;
             });
             
-            console.log(`🔧 Generated HTML length: ${html.length}`);
             return html;
         }
 
@@ -3740,11 +3731,9 @@
                     // Check if this is a skill group that needs dynamic loading
                     const skillGroup = taxonomyData.skillsMaster[code];
                     if (skillGroup && skillGroup.type === 'skillgroup') {
-                        console.log(`🔧 Loading children for skill group: ${code} (${skillGroup.label})`);
                         childrenEl.innerHTML = renderSkillGroupWithChildren(code);
                     } else {
                         // For occupation groups, use existing logic
-                        console.log(`🔧 Loading children for occupation group: ${code}`);
                         const economyType = currentSubTab.includes('unseen') ? 'unseen' : 'seen';
                         childrenEl.innerHTML = renderChildItems(code, economyType);
                     }
@@ -4127,9 +4116,7 @@
         // Enhanced tree node click handler for full-box toggle functionality
         function handleTreeNodeClick(code, type, hasChildren, event) {
             if (event) event.stopPropagation();
-            
-            console.log(`🖱️ Full-box click: ${code}, type: ${type}, hasChildren: ${hasChildren}`);
-            
+                        
             if (hasChildren) {
                 // For expandable items: toggle expansion on any click using UNIFIED function
                 toggleNodeGeneric(code, event);
@@ -4878,7 +4865,6 @@
 
         // Browser navigation handler - handles back/forward buttons
         window.addEventListener('popstate', (event) => {
-            console.log('🔙 Browser navigation detected');
             const state = event.state || parseURL(window.location.pathname, window.location.search);
             
             // Don't create new history entry when navigating back/forward
@@ -4953,10 +4939,8 @@
                 
                 // Handle item selection or search
                 if (state.itemId) {
-                    console.log(`🎯 URL item selection: ${state.itemId}`);
                     selectItemById(state.itemId);
                 } else if (state.searchQuery) {
-                    console.log(`🔍 URL search query: ${state.searchQuery}`);
                     document.getElementById('searchBox').value = state.searchQuery;
                     performSearch();
                 } else if (state.taxonomy === 'skills') {
@@ -4971,13 +4955,10 @@
         }
 
         function initializeFromURL() {
-            console.log('🚀 Initializing app from URL:', window.location.pathname);
             
             const currentState = parseURL(window.location.pathname, window.location.search);
             urlState = currentState;
-            
-            console.log('🔧 Parsed URL state:', currentState);
-            
+                    
             // Set global app state from URL
             currentLanguage = currentState.lang;
             currentLocalization = currentState.localization === 'base' ? null : currentState.localization;
@@ -5015,10 +4996,8 @@
             }).then(() => {
                 // Once data is loaded, handle URL-specific actions
                 if (currentState.itemId) {
-                    console.log('🎯 Initial item selection from URL:', currentState.itemId);
                     selectItemById(currentState.itemId);
                 } else if (currentState.searchQuery) {
-                    console.log('🔍 Initial search from URL:', currentState.searchQuery);
                     document.getElementById('searchBox').value = currentState.searchQuery;
                     performSearch();
                 } else {
