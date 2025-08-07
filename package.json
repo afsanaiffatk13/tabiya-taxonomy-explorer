@@ -5,7 +5,9 @@
   "main": "spanish-converter.js",
   "dependencies": {
     "csv-parser": "^3.0.0",
-    "csv-writer": "^1.6.0"
+    "csv-writer": "^1.6.0",
+    "papaparse": "^5.5.3",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "convert": "node spanish-converter.js"
