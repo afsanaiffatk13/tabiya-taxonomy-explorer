@@ -2503,7 +2503,7 @@
             const responses = await Promise.all(
                 fileNames.map(async (fileName) => {
                     // Ensure absolute path from site root
-                    const fullPath = dataPath.startsWith('/') ? `${dataPath}/${fileName}` : `/${dataPath}/${fileName}`;                    
+                    const fullPath = `${dataPath}/${fileName}`;                    
                     const response = await fetch(fullPath);
                     if (!response.ok) {
                         throw new Error(`Failed to load ${fileName}: ${response.status} ${response.statusText}`);
